@@ -1,8 +1,5 @@
 using UnityEngine;
 
-public class ShakeReset : MonoBehaviour
+public partial class ShakeReset : MonoBehaviour
 {
-	public void ResetLogic()
-	{
-	}
 }

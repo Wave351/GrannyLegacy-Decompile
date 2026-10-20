@@ -1,12 +1,7 @@
 using UnityEngine;
 
-public class CowlegRuin : MonoBehaviour
+public partial class CowlegRuin : MonoBehaviour
 {
 	public GameObject RuinParts;
-
 	public GameObject EffectRuin;
-
-	public void RuinMeat()
-	{
-	}
 }

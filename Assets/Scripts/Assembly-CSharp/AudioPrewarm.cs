@@ -1,10 +1,6 @@
 using UnityEngine;
 
-public class AudioPrewarm : MonoBehaviour
+public partial class AudioPrewarm : MonoBehaviour
 {
 	public AudioClip[] Clip;
-
-	private void Start()
-	{
-	}
 }

@@ -1,10 +1,6 @@
 using UnityEngine;
 
-public class FallChangeSwitch : MonoBehaviour
+public partial class FallChangeSwitch : MonoBehaviour
 {
 	public FallingHolder FH;
-
-	private void OnTriggerEnter(Collider other)
-	{
-	}
 }

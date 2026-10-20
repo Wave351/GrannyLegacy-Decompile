@@ -1,10 +1,6 @@
 using UnityEngine;
 
-public class Activate_Splash : MonoBehaviour
+public partial class Activate_Splash : MonoBehaviour
 {
 	public WaterSplash WS;
-
-	private void OnTriggerEnter(Collider other)
-	{
-	}
 }

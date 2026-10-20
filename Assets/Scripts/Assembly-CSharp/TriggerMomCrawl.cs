@@ -1,10 +1,6 @@
 using UnityEngine;
 
-public class TriggerMomCrawl : MonoBehaviour
+public partial class TriggerMomCrawl : MonoBehaviour
 {
 	public EnemyController EnemyController;
-
-	private void OnTriggerEnter(Collider other)
-	{
-	}
 }
