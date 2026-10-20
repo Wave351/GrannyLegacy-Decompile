@@ -1,10 +1,6 @@
 using UnityEngine;
 
-public class PlankFall : MonoBehaviour
+public partial class PlankFall : MonoBehaviour
 {
 	public AudioClip BreakSound;
-
-	public void BreakPlank()
-	{
-	}
 }
