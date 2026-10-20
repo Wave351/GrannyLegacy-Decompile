@@ -1,0 +1,149 @@
+using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
+
+public class AI_Slendrina : MonoBehaviour
+{
+	public NavMeshAgent Agent;
+
+	public Transform SlendrinaTransform;
+
+	public Renderer SlendrinaMesh;
+
+	public Camera CameraPlayer;
+
+	public PlayerStatus PS;
+
+	public float NearDis;
+
+	public float FarDis;
+
+	public int Attemps;
+
+	public int NavMeshAreaMask;
+
+	public Vector3 normalExtent;
+
+	public Vector3 easierExtent;
+
+	public Vector3 normalCenter;
+
+	public Vector3 easierCenter;
+
+	public float WanderSpeed;
+
+	public float DistanceFromPlayerSpawn;
+
+	public bool PathingToPlayer;
+
+	public Transform TeleportPointA;
+
+	public Transform TeleportPointB;
+
+	public Transform SPPlayerBack;
+
+	public Vector3 StartPosV;
+
+	public Transform StartPos;
+
+	public Transform LookAtPoint;
+
+	public Transform LookRayCast;
+
+	public Transform LookRayCast2;
+
+	public Transform LookRayCast3;
+
+	public GameObject CamPivot;
+
+	public Transform PlayerTransform;
+
+	public MobileFPS FPS;
+
+	public Transform HeadPL;
+
+	public float Health;
+
+	public float DamageSpeed;
+
+	public bool PlayerCaughtAttention;
+
+	public bool IsRenderingSlendrina;
+
+	public bool SlendrinaTouchesPlayer;
+
+	public LayerMask LayersRay;
+
+	public bool Travel;
+
+	public float TimerTeleport;
+
+	public float TimerMaxTeleport;
+
+	public float TimerIdle;
+
+	public float TimerMaxIdle;
+
+	public AudioSource SawSource;
+
+	public AudioSource SlendrinaHunts;
+
+	public AudioClip StareFar;
+
+	public AudioClip StareNear;
+
+	public float CloseDistance;
+
+	public float TeleportAwayDistance;
+
+	public Image BloodScreen;
+
+	public float BorderBloodValue;
+
+	public float SpeedBorderFade;
+
+	public float SpeedLookingFade;
+
+	public float SpeedBorderFadeGo;
+
+	public float SpeedLookingFadeGo;
+
+	public EnemyController EC;
+
+	public FallingHolder Fall;
+
+	public Enter_SC SC;
+
+	public AtticSpider AS;
+
+	public Animation ShakeAnim;
+
+	private void Start()
+	{
+	}
+
+	private void Update()
+	{
+	}
+
+	private bool CameraRenderSlendrina(Renderer MeshE, Camera Player)
+	{
+		return false;
+	}
+
+	public void EnemySpawn()
+	{
+	}
+
+	public void ReturnIdle()
+	{
+	}
+
+	public void KeepDistanceManual(float desiredDistance)
+	{
+	}
+
+	public void Teleport()
+	{
+	}
+}

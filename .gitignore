@@ -1,0 +1,22 @@
+# Unity generated
+/Library/
+/Temp/
+/Logs/
+/obj/
+/UserSettings/
+/Captures/
+*.csproj
+*.sln
+# Large binary exports (unchanged from AssetRipper; originals in apk-extracted)
+/Assets/Texture2D/
+/Assets/AudioClip/
+/Assets/Mesh/
+/Assets/VideoClip/
+/Assets/Cubemap/
+/Assets/Sprite/
+/Assets/Resources/textures/
+*.png
+*.ogg
+*.wav
+*.mp4
+*.exr

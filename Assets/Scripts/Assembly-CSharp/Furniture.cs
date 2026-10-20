@@ -1,0 +1,170 @@
+using UnityEngine;
+
+public class Furniture : MonoBehaviour
+{
+	public GameObject Table1;
+
+	public Vector3 StartPosTable1;
+
+	public Quaternion StartRotTable1;
+
+	public GameObject Table2;
+
+	public Vector3 StartPosTable2;
+
+	public Quaternion StartRotTable2;
+
+	public GameObject Lamp1;
+
+	public Vector3 StartPosLamp1;
+
+	public Quaternion StartRotLamp1;
+
+	public GameObject Lamp2;
+
+	public Vector3 StartPosLamp2;
+
+	public Quaternion StartRotLamp2;
+
+	public GameObject Lamp3;
+
+	public Vector3 StartPosLamp3;
+
+	public Quaternion StartRotLamp3;
+
+	public GameObject CandleStick1;
+
+	public Vector3 StartPosCandleStick1;
+
+	public Quaternion StartRotCandleStick1;
+
+	public GameObject CandleStick2;
+
+	public Vector3 StartPosCandleStick2;
+
+	public Quaternion StartRotCandleStick2;
+
+	public GameObject CandleStick3;
+
+	public Vector3 StartPosCandleStick3;
+
+	public Quaternion StartRotCandleStick3;
+
+	public GameObject Tavla1;
+
+	public Vector3 StartPosTavla1;
+
+	public Quaternion StartRotTavla1;
+
+	public GameObject Tavla2;
+
+	public Vector3 StartPosTavla2;
+
+	public Quaternion StartRotTavla2;
+
+	public GameObject Tavla3;
+
+	public Vector3 StartPosTavla3;
+
+	public Quaternion StartRotTavla3;
+
+	public GameObject Tavla4;
+
+	public Vector3 StartPosTavla4;
+
+	public Quaternion StartRotTavla4;
+
+	public GameObject Tavla5;
+
+	public Vector3 StartPosTavla5;
+
+	public Quaternion StartRotTavla5;
+
+	public GameObject Tav1;
+
+	public Vector3 StartPosTav1;
+
+	public Quaternion StartRotTav1;
+
+	public GameObject Tav2;
+
+	public Vector3 StartPosTav2;
+
+	public Quaternion StartRotTav2;
+
+	public GameObject Tav3;
+
+	public Vector3 StartPosTav3;
+
+	public Quaternion StartRotTav3;
+
+	public GameObject T1;
+
+	public Vector3 StartPosT1;
+
+	public Quaternion StartRotT1;
+
+	public GameObject T2;
+
+	public Vector3 StartPosT2;
+
+	public Quaternion StartRotT2;
+
+	public GameObject T3;
+
+	public Vector3 StartPosT3;
+
+	public Quaternion StartRotT3;
+
+	public GameObject Galge;
+
+	public Vector3 StartPosGalge;
+
+	public Quaternion StartRotGalge;
+
+	public GameObject Chair;
+
+	public Vector3 StartPosChair;
+
+	public Quaternion StartRotChair;
+
+	public GameObject Door;
+
+	public Vector3 StartPosDoor;
+
+	public Quaternion StartRotDoor;
+
+	public GameObject Box;
+
+	public Vector3 StartPosBox;
+
+	public Quaternion StartRotBox;
+
+	public GameObject Ped;
+
+	public Vector3 StartPosPed;
+
+	public Quaternion StartRotPed;
+
+	public GameObject Doll;
+
+	public Vector3 StartPosDoll;
+
+	public Quaternion StartRotDoll;
+
+	public GameObject Can;
+
+	public Vector3 StartPosCan;
+
+	public Quaternion StartRotCan;
+
+	public FurnitureUnit[] UnitsFurni;
+
+	private void Start()
+	{
+	}
+
+	public void CleanUp()
+	{
+	}
+}
