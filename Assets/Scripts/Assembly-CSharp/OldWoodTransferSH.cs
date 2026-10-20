@@ -1,8 +1,5 @@
 using UnityEngine;
 
-public class OldWoodTransferSH : MonoBehaviour
+public partial class OldWoodTransferSH : MonoBehaviour
 {
-	private void Start()
-	{
-	}
 }

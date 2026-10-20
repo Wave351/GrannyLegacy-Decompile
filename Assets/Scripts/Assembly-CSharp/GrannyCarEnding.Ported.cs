@@ -10,7 +10,7 @@ using UnityEngine.UI;
 // Ported from Annotated-Pseudocode/GrannyCarEnding.c (Granny Legacy, IL2CPP x64).
 public partial class GrannyCarEnding
 {
-	private void Reset()
+	public GrannyCarEnding()
 	{
 		SpeedWalk = 1.7f;
 	}

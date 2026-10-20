@@ -10,7 +10,7 @@ using UnityEngine.UI;
 // Ported from Annotated-Pseudocode/CanvasScaleModify.c (Granny Legacy, IL2CPP x64).
 public partial class CanvasScaleModify
 {
-	private void Reset()
+	public CanvasScaleModify()
 	{
 		ultrawideAspect = 2f;
 	}

@@ -10,7 +10,7 @@ using UnityEngine.UI;
 // Ported from Annotated-Pseudocode/HideVision.c (Granny Legacy, IL2CPP x64).
 public partial class HideVision
 {
-	private void Reset()
+	public HideVision()
 	{
 		HidingOnTop = true;
 	}

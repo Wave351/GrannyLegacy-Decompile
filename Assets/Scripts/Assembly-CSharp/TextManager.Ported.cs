@@ -10,7 +10,7 @@ using UnityEngine.UI;
 // Ported from Annotated-Pseudocode/TextManager.c (Granny Legacy, IL2CPP x64).
 public partial class TextManager
 {
-	private void Reset()
+	public TextManager()
 	{
 		TimeF = 5f;
 		Max = 1.7f;

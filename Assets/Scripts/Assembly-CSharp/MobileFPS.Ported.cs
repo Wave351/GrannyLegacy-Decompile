@@ -4,7 +4,7 @@ using UnityEngine;
 // Ported from Annotated-Pseudocode/MobileFPS.c (Granny Legacy, IL2CPP x64).
 public partial class MobileFPS
 {
-	private void Reset()
+	public MobileFPS()
 	{
 		moveSpeed = 5f;
 		SpeedMove = 6f;

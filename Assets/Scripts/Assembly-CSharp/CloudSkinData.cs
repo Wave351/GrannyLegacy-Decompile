@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class CloudSkinData
+public partial class CloudSkinData
 {
 	public List<string> skinKeys;
 }

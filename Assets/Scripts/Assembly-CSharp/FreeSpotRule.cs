@@ -1,14 +1,10 @@
 using UnityEngine;
 
-public class FreeSpotRule : MonoBehaviour
+public partial class FreeSpotRule : MonoBehaviour
 {
 	public bool deactivateSpotSpawn;
-
 	public bool specificAreaOnly;
-
 	public float itemsWithinSame;
-
 	public float itemsWithinMax;
-
 	public FreeSpotRule[] linkedSpots;
 }

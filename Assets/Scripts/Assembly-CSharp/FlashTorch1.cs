@@ -1,10 +1,6 @@
 using UnityEngine;
 
-public class FlashTorch1 : MonoBehaviour
+public partial class FlashTorch1 : MonoBehaviour
 {
 	public GameObject[] Flash;
-
-	private void Start()
-	{
-	}
 }

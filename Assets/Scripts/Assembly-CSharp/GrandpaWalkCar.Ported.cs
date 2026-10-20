@@ -10,7 +10,7 @@ using UnityEngine.UI;
 // Ported from Annotated-Pseudocode/GrandpaWalkCar.c (Granny Legacy, IL2CPP x64).
 public partial class GrandpaWalkCar
 {
-	private void Reset()
+	public GrandpaWalkCar()
 	{
 		CurrentWalkV = 31.81f;
 		MaxWalkReach = 123.42f;
