@@ -3,316 +3,143 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Days : MonoBehaviour
+public partial class Days : MonoBehaviour
 {
 	public GameObject ShakeCam;
-
 	public GameObject GroundC;
-
 	public GameObject Player;
-
 	public GameObject CamN;
-
 	public Transform PositionPlayerBack;
-
 	public float CurrentDay;
-
 	public bool ExtraDay;
-
 	public float FadeSpeedText;
-
 	public Image BlackScreen;
-
 	public AudioSource AudioHold;
-
 	public AudioClip DayTextPopup;
-
 	public Animation PlayerBedAnim;
-
 	public GameObject BedNoise;
-
 	public GameObject UIElements;
-
 	public Image Text_Day1;
-
 	public Image Text_Day2;
-
 	public Image Text_Day3;
-
 	public Image Text_Day4;
-
 	public Image Text_Day5;
-
 	public Image Text_Day5Final;
-
 	public Image Text_Day6;
-
 	public bool BeganDay;
-
 	public GameObject Day4Blood;
-
 	public GameObject BedBlood;
-
 	public AudioClip HuntClassic;
-
 	public AudioClip HuntDefault;
-
 	public AudioClip HuntG2;
-
 	public AudioClip HuntG3;
-
 	public AudioClip HuntDefaultNM;
-
 	public AudioClip HuntG2NM;
-
 	public AudioClip HuntG3NM;
-
 	public AudioClip OutNM;
-
 	public AudioClip SeeNM;
-
 	public AudioSource SeeEnemy;
-
 	public AudioSource HuntSource;
-
 	public AudioSource IGSource;
-
 	public AudioSource OutSource;
-
 	public GameObject SpiderAtticSpray;
-
 	public GameObject SpiderMomSpray;
-
 	public SkinnedMeshRenderer SpiderAtticSMR;
-
 	public SkinnedMeshRenderer SpiderMomSMR;
-
 	public GameObject SpiderWall;
-
 	public GameObject SpiderWebs;
-
 	public AudioClip BGNM;
-
 	public GameObject PauseManager;
-
 	public GameObject OldWater;
-
 	public GameObject NMStuff;
-
 	public Material Normal;
-
 	public Material NM;
-
 	public GameObject BatteryMain;
-
 	public GameObject CodeMain;
-
 	public GameObject Codes;
-
 	public GameObject Batteries;
-
 	public GameObject NormalLock;
-
 	public GameObject ExtremeLock;
-
 	public GameObject HardLock;
-
 	public GameObject EasyFeature;
-
 	public GameObject NormalFeature;
-
 	public GameObject ExtremeFeature;
-
 	public GameObject ImpossibleFeature;
-
 	public GameObject HollowFeature;
-
 	public GameObject Texts;
-
 	public BGManager BGManager;
-
 	public ScreenEffects ScreenEffects;
-
 	public Exit_SC Exit_SC;
-
 	public PickRay RayPick;
-
 	public AnimatedStuff Drawer1;
-
 	public AnimatedStuff Drawer2;
-
 	public AnimatedStuff Drawer3;
-
 	public AnimatedStuff Drawer4;
-
 	public AnimatedStuff Drawer5;
-
 	public AnimatedStuff Drawer6;
-
 	public AnimatedStuff Drawer7;
-
 	public AnimatedStuff Drawer8;
-
 	public AnimatedStuff Closet1;
-
 	public AnimatedStuff Closet2;
-
 	public AnimatedStuff Closet3;
-
 	public AnimatedStuff Door1;
-
 	public AnimatedStuff Door2;
-
 	public AnimatedStuff Door3;
-
 	public AnimatedStuff Door4;
-
 	public AnimatedStuff Door5;
-
 	public AnimatedStuff Door6;
-
 	public AnimatedStuff Door7;
-
 	public AnimatedStuff Door8;
-
 	public AnimatedStuff Door9;
-
 	public AnimatedStuff Door10;
-
 	public AnimatedStuff Door11;
-
 	public AnimatedStuff Door12;
-
 	public AnimatedStuff Fridge;
-
 	public AnimatedStuff Cabinet1;
-
 	public AnimatedStuff Cabinet2;
-
 	public AnimatedStuff Cabinet3;
-
 	public AnimatedStuff Cabinet4;
-
 	public AnimatedStuff Cabinet5;
-
 	public AnimatedStuff Cabinet6;
-
 	public AnimatedStuff Dulap1;
-
 	public AnimatedStuff Dulap2;
-
 	public AnimatedStuff Dulap3;
-
 	public AnimatedStuff Dulap4;
-
 	public AnimatedStuff Locker;
-
 	public AnimatedStuff Playhouse;
-
 	public AnimatedStuff OldCabinet;
-
 	public EnemyController EC;
-
 	public Furniture Furni;
-
 	public RayRemoveTraps RemoveRay;
-
 	public float ValueFade;
-
 	public GameObject BCam1;
-
 	public GameObject BCam2;
-
 	public GameObject BCam3;
-
 	public ParticleSystem PepperEffect;
-
 	public ParticleSystem PepperEffectGranny;
-
 	public NavMeshObstacle ObstacleSauna;
-
 	public Gameovers GOvers;
-
 	public GameObject NMStuff2;
-
 	public GameObject NoiseTRN;
-
 	public GameObject FlashActiv;
-
 	public ftLightmapsStorage ftLS;
-
 	public GameObject NumberPads;
-
 	public GameObject PepperSpray;
-
 	public GameObject ClosetDoor1;
-
 	public GameObject ClosetDoor2;
-
 	public TriggerFall BathroomFallHatch;
-
 	public GameObject BackyardBoxDoor;
-
 	public GameObject CoffinBackyard;
-
 	public BackdoorManage BackdoorManag;
-
 	public GameObject LightBulbs;
-
 	public GameObject AmmoSetSh2;
-
 	public GameObject Bed1HideTrigger;
-
 	public GameObject Bed2HideTrigger;
-
 	public GameObject Bed3HideTrigger;
-
 	public GameObject Dart1;
-
 	public GameObject Dart2;
-
 	public GameObject Webs;
-
 	public GameObject[] SpidersHallo;
-
 	public GameObject GridExtreme;
-
 	public GameObject[] GridImpossible;
-
-	private void Start()
-	{
-	}
-
-	private void Update()
-	{
-	}
-
-	public void StartNew()
-	{
-	}
-
-	public IEnumerator StartDays()
-	{
-		return null;
-	}
-
-	public void DoorsClose()
-	{
-	}
-
-	public void NoiseObjectsKilled()
-	{
-	}
-
-	public void KillRagdolls()
-	{
-	}
-
-	public void DisableCaught()
-	{
-	}
-
-	private void CamFOVReset()
-	{
-	}
 }

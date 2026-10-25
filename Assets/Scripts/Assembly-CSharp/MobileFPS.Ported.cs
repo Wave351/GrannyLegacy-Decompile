@@ -277,7 +277,7 @@ public partial class MobileFPS
 		Rigidbody body = OBJ.collider.GetComponent<Rigidbody>();
 		if (body != null && !body.isKinematic && OBJ.moveDirection.y >= -0.2f)
 		{
-			body.velocity = new Vector3(OBJ.moveDirection.x * 3.6f, 0f, OBJ.moveDirection.z * 3.6f);
+			body.linearVelocity = new Vector3(OBJ.moveDirection.x * 3.6f, 0f, OBJ.moveDirection.z * 3.6f);
 		}
 	}
 }

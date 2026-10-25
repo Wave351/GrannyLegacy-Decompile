@@ -18,7 +18,7 @@ public partial class SmokeAmmo
 
 	private void Update()
 	{
-		if (canGoOff && rigid.velocity.magnitude < 0.1f && !e.isStopped)
+		if (canGoOff && rigid.linearVelocity.magnitude < 0.1f && !e.isStopped)
 		{
 			ParticleSystem.MainModule main = e.main;
 			main.loop = false;
