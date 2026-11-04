@@ -1,216 +1,105 @@
 using UnityEngine;
 
-public class ObjectsManager : MonoBehaviour
+public partial class ObjectsManager : MonoBehaviour
 {
 	public GameObject AreaCover;
-
 	public GameObject AreaCoverSubBasement;
-
 	public GameObject ElectricCoil;
-
 	public GameObject OmGiStuff;
-
 	public GameObject[] ExtrasItems;
-
 	public GameObject Preset1O;
-
 	public GameObject Preset2O;
-
 	public GameObject Preset3O;
-
 	public GameObject Preset4O;
-
 	public GameObject Preset5O;
-
 	public GameObject Preset1First;
-
 	public GameObject Preset2First;
-
 	public GameObject Preset3First;
-
 	public GameObject Preset4First;
-
 	public GameObject BatteryPL1;
-
 	public GameObject BatteryPL2;
-
 	public GameObject BatteryPL3;
-
 	public GameObject BatteryPL4;
-
 	public GameObject BatteryPL5;
-
 	public GameObject GuillotinePL1;
-
 	public GameObject GuillotinePL2;
-
 	public GameObject GuillotinePL3;
-
 	public GameObject GuillotinePL4;
-
 	public GameObject GuillotinePL5;
-
 	public GameObject AllItemsMelon;
-
 	public GameObject BatterysCodes;
-
 	public GameObject MainItems;
-
 	public GameObject CodePL1;
-
 	public GameObject CodePL2;
-
 	public GameObject CodePL3;
-
 	public GameObject CodePL4;
-
 	public GameObject CodePL5;
-
 	public GameObject NumberPad1;
-
 	public GameObject NumberPad2;
-
 	public Transform[] PositionsNumberPad;
-
 	public GameObject PaintingBedroom;
-
 	public Transform PaintingBedroomRepos;
-
 	public Transform ObjectResetPointOld;
-
 	public Transform ObjResetPoint;
-
 	public float NumberChoosen;
-
 	public GameObject GrandpaVase;
-
 	public Transform[] VasePositionsGrandpa;
-
 	public GameObject Crossbow;
-
 	public GameObject CrossbowOnly;
-
 	public GameObject PTrap;
-
 	public GameObject FTrap;
-
 	public Transform[] SpawnsPoison;
-
 	public GameObject AmmoThere;
-
 	public GameObject TB1;
-
 	public GameObject TB2;
-
 	public GameObject TB3;
-
 	public GameObject TB4;
-
 	public Transform[] TB1_POSES;
-
 	public Transform[] TB2_POSES;
-
 	public Transform[] TB3_POSES;
-
 	public Transform[] TB4_POSES;
-
 	public GameObject Pieces;
-
 	public GameObject FirstVer;
-
 	public GameObject OldVer;
-
 	public GameObject WeaponKeyP4OneFour;
-
 	public GameObject CuttingPliersP2Old;
-
 	public GameObject WPKeyFourCompartment;
-
 	public float PresetChoosenCurrent;
-
 	public Transform SetPic3ToSpotPos;
-
 	public Transform SetPic4ToSpotPos;
-
 	public Transform PicturePos_3;
-
 	public Transform PicturePos_4_1;
-
 	public Transform PicturePos_4_2;
-
 	public Transform SetVaseToHousePos;
-
 	public Transform SpiderCellarVasePos;
-
 	public Transform SewerVasePos1;
-
 	public Transform SewerVasePos2;
-
 	public Transform SewerVasePos3;
-
 	public Transform AtticVasePos1;
-
 	public Transform AtticVasePos2;
-
 	public Transform BackyardVasePos;
-
 	public Transform CellarVasePos;
-
 	public GameObject Seed_Main;
-
 	public GameObject Seed_Extra;
-
 	public GameObject Seed_17;
-
 	public GameObject Seed_16;
-
 	public GameObject Seed_15;
-
 	public GameObject Seed_14;
-
 	public GameObject Seed_13;
-
 	public GameObject Seed_12;
-
 	public GameObject Seed_11;
-
 	public GameObject Seed_10;
-
 	public GameObject SeedStuff;
-
 	public GameObject[] DisableOneSevenObjects;
-
 	public GameObject[] DisableOneSixObjects;
-
 	public GameObject[] DisableOneFiveObjects;
-
 	public GameObject[] DisableOneFourObjects;
-
 	public GameObject[] DisableOneThreeObjects;
-
 	public GameObject[] DisableOneTwoObjects;
-
 	public GameObject[] DisableOneOneObjects;
-
 	public GameObject[] DisableOneZeroObjects;
-
 	public Transform PtrapSafe;
-
 	public RemoteRat RemoteRatHang1;
-
 	public RemoteRat RemoteRatHang2;
-
 	public GameObject Spray;
-
-	private void Start()
-	{
-	}
-
-	private void Update()
-	{
-	}
-
-	public void SwitchOneFourVersion()
-	{
-	}
 }
