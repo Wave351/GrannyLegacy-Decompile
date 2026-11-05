@@ -15,7 +15,7 @@ public partial class EasterEgg
 	    if (EggOpened) return;
 	    if (10 < TimesBumped) { EggOpened = true; RandomGift(); return; }
 	    var body = GetComponent<Rigidbody>();
-	    if (!body || body.velocity.magnitude >= 1.5f || !BumpingOn) return;
+	    if (!body || body.linearVelocity.magnitude >= 1.5f || !BumpingOn) return;
 	    // Keeps hopping around while it slows down.
 	    Vector3 dir = (UnityEngine.Random.onUnitSphere + transform.forward * .3f).normalized;
 	    dir.y = Mathf.Clamp(dir.y, -.2f, .5f);
@@ -35,10 +35,10 @@ public partial class EasterEgg
 	    TimesBumped += 1;
 	    var body = GetComponent<Rigidbody>();
 	    if (!body) return;
-	    Vector3 dir = Vector3.Reflect(body.velocity.normalized, collision.contacts[0].normal);
+	    Vector3 dir = Vector3.Reflect(body.linearVelocity.normalized, collision.contacts[0].normal);
 	    dir = (dir + UnityEngine.Random.insideUnitSphere * .6f).normalized;
 	    dir.y = Mathf.Clamp(dir.y, -.2f, .5f);
-	    body.velocity = dir * LaunchBumpForce;
+	    body.linearVelocity = dir * LaunchBumpForce;
 	    AudioSource.PlayClipAtPoint(EasterEggBump, transform.position);
 	}
 	// After 10 bumps the egg opens: a Grandpa ragdoll, a dart, an explosion, ammo, a bear trap or (on Extreme/Hollow) just a fart.

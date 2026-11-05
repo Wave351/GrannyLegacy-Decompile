@@ -46,7 +46,7 @@ public partial class SnowManAI
 	        var ball = Instantiate(SnowBall, SnowBallThrowPoint.position, SnowBallThrowPoint.rotation);
 	        var body = ball.GetComponent<Rigidbody>();
 	        if (!body) return;
-	        body.velocity = Vector3.zero;
+	        body.linearVelocity = Vector3.zero;
 	        body.angularVelocity = Vector3.zero;
 	        body.AddForce(SnowBallThrowPoint.forward * 15, ForceMode.Impulse);
 	        return;

@@ -17,7 +17,7 @@ public partial class HidingCamera
 	private void Update()
 	{
 	    if (Paused.IsPaused) return;
-	    cameraRotationSpeed = PlayerPrefs.GetFloat("sensitivity");
+	    cameraRotationSpeed = PlayerPrefs.GetFloat("sensitivity", 2f);
 	    if (!Status.IsJumpscared) { GetTouchInput(); return; }
 	    GameObject enemy = Status.LookAtGranny ? Granny : Status.LookAtGrandpa ? Grandpa : null;
 	    if (enemy == null) return;

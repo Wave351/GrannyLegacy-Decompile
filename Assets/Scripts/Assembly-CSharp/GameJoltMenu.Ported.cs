@@ -22,7 +22,8 @@ public partial class GameJoltMenu
 	private void Update()
 	{
 	    var api = GameJolt.API.GameJoltAPI.Instance;
-	    if (api.CurrentUser == null)
+	    // Restoration guard: the GameJolt API object is missing when the menu runs in the editor.
+	    if (api == null || api.CurrentUser == null)
 	    {
 	        UsernameText.text = "Not signed in";
 	        sessionSynced = false;

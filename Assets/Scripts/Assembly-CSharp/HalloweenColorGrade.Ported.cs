@@ -47,7 +47,7 @@ public partial class HalloweenColorGrade
 	    bool nm = PlayerPrefs.GetInt("Textures") == 1;
 	    if (holiday == 2)
 	    {
-	        Grade(PostExposureEV_CH, HueShift_CH, Saturation_CH, Contrast_CH, null);
+	        Grade(PostExposureEV_CH, HueShift_CH, Saturation_CH, Contrast_CH, colorNormal);
 	        if (nm) Skins(NM, TeddyNM, null); else Skins(SlendrinaNormal, TeddyNormal, null);
 	        MusicChristmas.SetActive(true); MusicNormal.SetActive(false); MusicHalloween.SetActive(false);
 	        Props(false, false, false, false, false);

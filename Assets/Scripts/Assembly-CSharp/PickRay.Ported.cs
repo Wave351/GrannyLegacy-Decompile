@@ -1246,7 +1246,7 @@ public partial class PickRay
 	                }
 	            }
 	        }
-	        else if (hitName == "WeaponLockerDoor")
+	        else if (hitName == "WeaponLockerDoor" && (HP == null || !HP.UsedWPKey))
 	        {
 	            var audio = GetComponent<AudioSource>();
 	            if (audio == null || !audio.isPlaying)
@@ -1263,8 +1263,6 @@ public partial class PickRay
 	                    }
 	                    else
 	                    {
-	                        H_WK.SetActive(false);
-	                        if (Drop1 != null) Drop1.SetActive(false);
 	                        if (HP != null) HP.UseWPKey();
 	                        StopSetOfTexts();
 	                        if (Ring != null) Ring.SetActive(false);
@@ -2408,9 +2406,11 @@ public partial class PickRay
 	                {
 	                    Inventory.PickupItem(itemName);
 	                }
-	                TurnOffItemTexts();
-	                if (Ring != null) Ring.SetActive(false);
+	                if (itemName == "RegShotgun") PickShotgun();
 	                Destroy(hit.collider.gameObject);
+	                TurnOffItemTexts();
+	                if (Drop1 != null) Drop1.SetActive(true);
+	                if (Ring != null) Ring.SetActive(false);
 	            }
 	        }
 	        else if (hitName == "RegShotgun")
@@ -2435,7 +2435,7 @@ public partial class PickRay
 	                Destroy(hit.collider.gameObject);
 	            }
 	        }
-	        else if (hitName == "ShotgunParentG" || hitName == "Shotgun2" || hitName == "ShotgunBed" || hitTag == "ShotgunParentG" || hitTag == "ShotgunBed")
+	        else if (hitName == "ShotgunParentG" || hitName == "Shotgun2" || hitTag == "Shotgun2" || hitName == "ShotgunBed" || hitTag == "ShotgunParentG" || hitTag == "ShotgunBed")
 	        {
 	            TurnOffItemTexts();
 	            if (T_HighlightItem != null)
@@ -2518,7 +2518,7 @@ public partial class PickRay
 	                }
 	            }
 	        }
-	        else if (hitName == "arrow")
+	        else if (hitTag == "arrow")
 	        {
 	            TurnOffItemTexts();
 	            if (T_HighlightItem != null)

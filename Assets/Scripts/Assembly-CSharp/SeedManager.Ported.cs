@@ -83,7 +83,7 @@ public partial class SeedManager
 	    var rb = item.GetComponent<Rigidbody>();
 	    if (rb)
 	    {
-	        rb.velocity = Vector3.zero;
+	        rb.linearVelocity = Vector3.zero;
 	        rb.angularVelocity = Vector3.zero;
 	        rb.isKinematic = !isFreeSpawn || !Rigid;
 	    }

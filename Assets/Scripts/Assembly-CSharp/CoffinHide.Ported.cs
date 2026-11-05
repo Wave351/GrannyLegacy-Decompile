@@ -19,6 +19,7 @@ public partial class CoffinHide
 	// The coffin lid swings between MaxUp and MaxDown (opposite directions for the two coffins) as the player gets in or out.
 	private void Update()
 	{
+	    NearCoffin = HideSpot.StillNear(this, Player, NearCoffin, InCoffin);
 	    if (TimerAgain < MaxAgain) { TimerAgain += Time.deltaTime; ButtonSprite.enabled = false; }
 	    else ButtonSprite.enabled = true;
 	    CoffinDoor.transform.localEulerAngles = new Vector3(ValueCoffinCurrent, YValue, ZValue);

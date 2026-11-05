@@ -7,43 +7,28 @@ Shader "Custom/LavaSimple" {
 		_Pulse ("Pulse Strength", Float) = 1
 		_EmissionStrength ("Emission", Float) = 2
 	}
-	//DummyShaderTextExporter
-	SubShader{
-		Tags { "RenderType" = "Opaque" }
-		LOD 200
-
-		Pass
-		{
-			HLSLPROGRAM
+	// Restored replacement for the AssetRipper placeholder.
+	SubShader {
+		Tags { "RenderType"="Opaque" }
+		Pass {
+			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-
-			float4x4 unity_ObjectToWorld;
-			float4x4 unity_MatrixVP;
-
-			struct Vertex_Stage_Input
-			{
-				float4 pos : POSITION;
-			};
-
-			struct Vertex_Stage_Output
-			{
-				float4 pos : SV_POSITION;
-			};
-
-			Vertex_Stage_Output vert(Vertex_Stage_Input input)
-			{
-				Vertex_Stage_Output output;
-				output.pos = mul(unity_MatrixVP, mul(unity_ObjectToWorld, input.pos));
-				return output;
+			#pragma multi_compile_fog
+			#include "UnityCG.cginc"
+			sampler2D _LavaTex; float4 _LavaTex_ST; sampler2D _NoiseTex;
+			float _FlowSpeed, _Distortion, _Pulse, _EmissionStrength;
+			struct v2f { float4 pos : SV_POSITION; float2 uv : TEXCOORD0; UNITY_FOG_COORDS(1) };
+			v2f vert (appdata_base v) { v2f o; o.pos = UnityObjectToClipPos(v.vertex); o.uv = TRANSFORM_TEX(v.texcoord, _LavaTex); UNITY_TRANSFER_FOG(o, o.pos); return o; }
+			fixed4 frag (v2f i) : SV_Target {
+				float t = _Time.y * _FlowSpeed;
+				float2 n = tex2D(_NoiseTex, i.uv + float2(t, t * 0.7)).rg - 0.5;
+				fixed4 c = tex2D(_LavaTex, i.uv + float2(0, t) + n * _Distortion);
+				c.rgb *= _EmissionStrength * 0.5 * (1 + 0.2 * _Pulse * sin(_Time.y * 2));
+				UNITY_APPLY_FOG(i.fogCoord, c);
+				return c;
 			}
-
-			float4 frag(Vertex_Stage_Output input) : SV_TARGET
-			{
-				return float4(1.0, 1.0, 1.0, 1.0); // RGBA
-			}
-
-			ENDHLSL
+			ENDCG
 		}
 	}
 	Fallback "Diffuse"

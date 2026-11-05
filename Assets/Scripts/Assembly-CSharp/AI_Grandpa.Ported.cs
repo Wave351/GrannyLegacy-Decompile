@@ -207,9 +207,13 @@ public partial class AI_Grandpa
 	private void CheckDoors()
 	{
 	    RaycastHit hit;
-	    if (!OpenDoorRay || !Physics.Raycast(OpenDoorRay.position, OpenDoorRay.forward, out hit, DoorDistance, LayerEx))
+	    // Restoration guard (EnemyDoorRay): also looks along the steering direction and from 0.75 m back.
+	    if (!EnemyDoorRay.Cast(OpenDoorRay, Agent, DoorDistance, LayerEx, out hit))
 	    { TimerDoorOpening = LockedDoorAttempts = 0; IsOpeningDoor = false; Agent.isStopped = false; return; }
 	    string door = hit.collider.gameObject.name;
+	    // Restoration guard: a door mid-swing is named "ProcessState" and is otherwise ignored, so the enemy kept walking
+	    // into it for the whole close animation. Wait in place instead; the open timer starts once it is fully shut.
+	    if (door == "ProcessState" && hit.collider.GetComponent<AnimatedStuff>()) { IsOpeningDoor = true; return; }
 	    bool closet = door == "GarderobDoor" || door == "MetalLockerDoor";
 	    bool open = door == "Innerdoor" || door == "SmallDoor" || door == "MeatDoor" || door == "OldHouseWoodenDoor" || door == "OuthouseDoor" || door == "StealDoor" || (closet && CanOpenClosets);
 	    bool close = door == "Motorhuv2" || door == "ClosetDoorR2" || door == "ClosetDoorL2";
@@ -425,7 +429,7 @@ public partial class AI_Grandpa
 	{
 	    if (!BC) return;
 	    var look = BC.GetMotor<com.ootii.Actors.BoneControllers.LookAtMotor>();
-	    if (look != null) look.TargetTransform = t;
+	    if (look != null) look.TargetTransform = t; BoneLookFallback.SetTarget(BC, t);
 	}
 	public AI_Grandpa()
 	{

@@ -66,6 +66,7 @@ public partial class Outline
 	{
 	    foreach (var renderer in renderers)
 	    {
+	        if (!renderer) continue; // child renderers (e.g. finished particle effects) can already be destroyed
 	        var materials = new List<Material>(renderer.sharedMaterials);
 	        materials.Remove(outlineMaskMaterial);
 	        materials.Remove(outlineFillMaterial);

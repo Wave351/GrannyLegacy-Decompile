@@ -54,7 +54,7 @@ public partial class SoundTrigger
 	    var body = parent ? parent.GetComponent<Rigidbody>() : null;
 	    if (!body) return;
 	    body.isKinematic = true;
-	    body.velocity = Vector3.zero;
+	    body.linearVelocity = Vector3.zero;
 	    if (!SpawnBack) return;
 	    parent.position = SpawnBack.transform.position;
 	    body.isKinematic = false;

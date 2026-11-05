@@ -19,21 +19,21 @@ public partial class QueerEnergy
 	}
 	private void Update()
 	{
-	    if (rigid.velocity.magnitude < 1)
+	    if (rigid.linearVelocity.magnitude < 1)
 	    {
 	        Vector3 dir = UnityEngine.Random.onUnitSphere;
 	        dir.y = Mathf.Clamp(dir.y, -.1f, .1f);
-	        rigid.velocity = dir * 10;
+	        rigid.linearVelocity = dir * 10;
 	    }
-	    if (rigid.velocity.sqrMagnitude > .1f) transform.forward = rigid.velocity.normalized;
+	    if (rigid.linearVelocity.sqrMagnitude > .1f) transform.forward = rigid.linearVelocity.normalized;
 	}
 	private void OnCollisionEnter(Collision collision)
 	{
 	    float speed = UnityEngine.Random.Range(4f, 15f);
-	    Vector3 dir = Vector3.Reflect(rigid.velocity.normalized, collision.contacts[0].normal);
+	    Vector3 dir = Vector3.Reflect(rigid.linearVelocity.normalized, collision.contacts[0].normal);
 	    dir = (dir + UnityEngine.Random.insideUnitSphere * .6f).normalized;
 	    dir.y = Mathf.Clamp(dir.y, -.1f, .1f);
-	    rigid.velocity = dir * 4 * speed;
+	    rigid.linearVelocity = dir * 4 * speed;
 	    Instantiate(bumpEffect, transform.position, transform.rotation);
 	    UnityEngine.Random.Range(0, 100);
 	}

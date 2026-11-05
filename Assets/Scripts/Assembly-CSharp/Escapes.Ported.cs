@@ -315,7 +315,7 @@ public partial class Escapes
 	    if (BoneControllerMom)
 	    {
 	        var look = BoneControllerMom.GetMotor<com.ootii.Actors.BoneControllers.LookAtMotor>();
-	        if (look != null) look.TargetTransform = PlayerTarget;
+	        if (look != null) look.TargetTransform = PlayerTarget; BoneLookFallback.SetTarget(BoneControllerMom, PlayerTarget);
 	        BoneControllerMom.enabled = true;
 	    }
 	    if (MomBodyRSpider) MomBodyRSpider.localRotation = Quaternion.identity;

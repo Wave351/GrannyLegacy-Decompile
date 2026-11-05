@@ -12,4 +12,16 @@ public static class HideSpot
 		if (grandpa.Seeing && grandpa.TimerStopVision < .7f) grandpa.PlayerSpotted = true;
 		else if (!grandpa.Seeing && .7f < grandpa.TimerStopVision) grandpa.AI.UnSeenPlayer = true;
 	}
+
+	// Restoration safety net: the player object is switched off while hidden, so a trigger exit can be missed and
+	// leave the "near" flag stuck on (icon visible and R working anywhere). Clear it once the player is out of the
+	// spot and more than a metre from its trigger.
+	public static bool StillNear(Component spot, GameObject player, bool near, bool hidden)
+	{
+		if (!near || hidden || player == null || !player.activeInHierarchy) return near;
+		var trigger = spot.GetComponent<Collider>();
+		if (trigger == null) return near;
+		Vector3 p = player.transform.position;
+		return (trigger.ClosestPoint(p) - p).sqrMagnitude <= 1f;
+	}
 }

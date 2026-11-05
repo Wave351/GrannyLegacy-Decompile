@@ -85,7 +85,7 @@ public partial class AI_MomSpider
 	        if (spawn) Instantiate(Web, WebSpawnP.transform.position, WebSpawnP.rotation);
 	    }
 	    var look = BC.GetMotor<LookAtMotor>();
-	    if (look != null) look.TargetTransform = IsEating ? PlayerHeadHand.transform : PlayerHead.transform;
+	    if (look != null) look.TargetTransform = IsEating ? PlayerHeadHand.transform : PlayerHead.transform; BoneLookFallback.SetTarget(BC, IsEating ? PlayerHeadHand.transform : PlayerHead.transform);
 	    if (IsHit)
 	    {
 	        if (BC && Agent)

@@ -9,43 +9,31 @@ Shader "Bakery/Skybox" {
 		_NoTexture ("No texture", Float) = 0
 		_Hemispherical ("Hemispherical", Float) = 0
 	}
-	//DummyShaderTextExporter
-	SubShader{
-		Tags { "RenderType" = "Opaque" }
-		LOD 200
-
-		Pass
-		{
-			HLSLPROGRAM
+	// Restored replacement for the AssetRipper placeholder.
+	SubShader {
+		Tags { "Queue"="Background" "RenderType"="Background" "PreviewType"="Skybox" }
+		Cull Off ZWrite Off
+		Pass {
+			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-
-			float4x4 unity_ObjectToWorld;
-			float4x4 unity_MatrixVP;
-
-			struct Vertex_Stage_Input
-			{
-				float4 pos : POSITION;
-			};
-
-			struct Vertex_Stage_Output
-			{
-				float4 pos : SV_POSITION;
-			};
-
-			Vertex_Stage_Output vert(Vertex_Stage_Input input)
-			{
-				Vertex_Stage_Output output;
-				output.pos = mul(unity_MatrixVP, mul(unity_ObjectToWorld, input.pos));
-				return output;
+			#include "UnityCG.cginc"
+			samplerCUBE _Tex; half4 _Tex_HDR; half4 _Tint; half _Exposure;
+			float4 _MatrixRight, _MatrixUp, _MatrixForward; half _NoTexture;
+			struct v2f { float4 pos : SV_POSITION; float3 dir : TEXCOORD0; };
+			v2f vert (appdata_base v) {
+				v2f o; o.pos = UnityObjectToClipPos(v.vertex);
+				float3 d = v.vertex.xyz;
+				o.dir = float3(dot(d, _MatrixRight.xyz), dot(d, _MatrixUp.xyz), dot(d, _MatrixForward.xyz));
+				return o;
 			}
-
-			float4 frag(Vertex_Stage_Output input) : SV_TARGET
-			{
-				return float4(1.0, 1.0, 1.0, 1.0); // RGBA
+			half4 frag (v2f i) : SV_Target {
+				half3 c = _NoTexture > 0.5 ? half3(1,1,1) : DecodeHDR(texCUBE(_Tex, i.dir), _Tex_HDR);
+				c = c * _Tint.rgb * unity_ColorSpaceDouble.rgb * _Exposure;
+				return half4(c, 1);
 			}
-
-			ENDHLSL
+			ENDCG
 		}
 	}
+	Fallback Off
 }

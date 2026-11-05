@@ -19,6 +19,7 @@ public partial class BedHide
 	}
 	private void Update()
 	{
+	    NearBed = HideSpot.StillNear(this, Player, NearBed, InBed);
 	    if (TimerAgain < MaxAgain) { TimerAgain += Time.deltaTime; ButtonSprite.enabled = false; }
 	    else ButtonSprite.enabled = true;
 	    ButtonSprite.sprite = InBed ? OutSprite : InSprite;
