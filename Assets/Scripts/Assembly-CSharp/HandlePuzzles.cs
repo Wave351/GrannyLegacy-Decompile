@@ -3,583 +3,203 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HandlePuzzles : MonoBehaviour
+public partial class HandlePuzzles : MonoBehaviour
 {
 	public GameObject NoiseObj;
-
 	public bool TankFuelled;
-
 	public float SpeedFill;
-
 	public Days Days;
-
 	public GameObject Pic1;
-
 	public GameObject Pic2;
-
 	public GameObject Pic3;
-
 	public GameObject Pic4;
-
 	public Animation GaragePort;
-
 	public AudioSource AudioGP;
-
 	public GameObject HangLockPort;
-
 	public bool openedPort;
-
 	public bool usedPadlockForPort;
-
 	public float FuelMeter;
-
 	public Image FuelMeterUI;
-
 	public Animation FuelTank;
-
 	public bool OpenedTank;
-
 	public bool FillingTank;
-
 	public GameObject FillSound;
-
 	public GameObject PlacedSparkplug;
-
 	public bool usedSparkPlug;
-
 	public GameObject EnginePartPlace;
-
 	public bool PlacedEnginePart;
-
 	public float SkruvEngine;
-
 	public GameObject CarBatteryInPlace;
-
 	public bool PlacedCarBattery;
-
 	public GameObject Sparking1;
-
 	public GameObject Sparking2;
-
 	public GameObject Sparking3;
-
 	public GameObject Sparking4;
-
 	public GameObject ChargeSpark1;
-
 	public GameObject ChargeSpark2;
-
 	public GameObject ChargeSpark3;
-
 	public GameObject ChargeSpark4;
-
 	public TMP_Text YesStatus;
-
 	public bool IsRecharging;
-
 	public bool RechargedRobot;
-
 	public GameObject FusePlaced;
-
 	public bool fuseInPlace;
-
 	public GameObject DataUSBPlaced;
-
 	public Renderer LightPC;
-
 	public GameObject NoDataT;
-
 	public GameObject YesDataT;
-
 	public bool PlacedUSB;
-
 	public float RechargedSites;
-
 	public GameObject DoorPanel;
-
 	public bool usedElecKey;
-
 	public Renderer LightRemote;
-
 	public GameObject HandleIn;
-
 	public GameObject HandleOut;
-
 	public GameObject SoundEffectRemote;
-
 	public GameObject SmallDoor;
-
 	public bool usedRemote;
-
 	public GameObject P1;
-
 	public GameObject P2;
-
 	public GameObject P3;
-
 	public GameObject DoneShotgun;
-
 	public bool GotShotgun;
-
 	public AnimatedStuff CarTrunk;
-
 	public bool UsedCarKey;
-
 	public GameObject MetalRust;
-
 	public float ScrewsOldHouse;
-
 	public bool ScrewedOldHouse;
-
 	public GameObject SlidingDoorAttic;
-
 	public GameObject AtticLockPlace;
-
 	public bool UsedSpecialKey;
-
 	public AI_Grandpa Grandpa;
-
 	public Transform NewNavGranpa;
-
 	public GameObject LekhusHolder;
-
 	public GameObject Cogwheel1;
-
 	public GameObject Cogwheel2;
-
 	public GameObject G1;
-
 	public GameObject G2;
-
 	public GameObject G3;
-
 	public GameObject G4;
-
 	public GameObject G5;
-
 	public GameObject G1N;
-
 	public GameObject G2N;
-
 	public GameObject G3N;
-
 	public GameObject G4N;
-
 	public GameObject G5N;
-
 	public bool PlacedCogwheels;
-
 	public GameObject CollLekhus;
-
 	public GameObject MelonPlace;
-
 	public bool PlacedMelon;
-
 	public GameObject LekhusPadlock;
-
 	public AnimatedStuff LekhusDoor;
-
 	public bool usedPlayhouseKey;
-
 	public GameObject WheelHold;
-
 	public float WheelCurrentValZ;
-
 	public float SpeedWheelMain;
-
 	public GameObject Hink;
-
 	public float ValueHinkCurrentY;
-
 	public float HinkGetSpeed;
-
 	public GameObject WinchHandleThere;
-
 	public GameObject SoundEffectWinch;
-
 	public float ValueWinchZ;
-
 	public float ValueWireY;
-
 	public float MaxBarbScale;
-
 	public float MaxBarbPos;
-
 	public GameObject Barbwire;
-
 	public float SpeedBarbWire;
-
 	public float ScaleBarbWire;
-
 	public float SpeedBarbWireScaleSpeed;
-
 	public float BarbSpedUp;
-
 	public Renderer Barb;
-
 	public float Tilling1;
-
 	public float SpeedRevTilling;
-
 	public float SpeedWinchHandle;
-
 	public float MaxBarbwire;
-
 	public bool IsUpFully;
-
 	public bool RotatingWinch;
-
 	public GameObject Fan;
-
 	public AudioSource FanAudio;
-
 	public GameObject FanCollider;
-
 	public GameObject AtticCable;
-
 	public GameObject AtticCableB;
-
 	public float FanRotation;
-
 	public float SpeedRotateFan;
-
 	public float FanStopSpeed;
-
 	public bool RotateFan;
-
 	public bool CutAtticWire;
-
 	public GameObject CrossBowStuff;
-
 	public Animation CrossBowDoor;
-
 	public GameObject WeaponCrossbow;
-
 	public GameObject[] DartsWeapon;
-
 	public bool UsedWPKey;
-
 	public Animation Bookshelf;
-
 	public Animation SwitchBookshelf;
-
 	public GameObject BookPlaced;
-
 	public EnemyController EnemyController;
-
 	public GameObject SafeDoorAnim;
-
 	public bool UsedSafeKey;
-
 	public bool IsDoorFree;
-
 	public Renderer L1;
-
 	public Renderer L2;
-
 	public bool UsedMaster;
-
 	public GameObject Cable1;
-
 	public GameObject Cable2;
-
 	public GameObject Cable1B;
-
 	public GameObject Cable2B;
-
 	public bool CutWire1;
-
 	public bool CutWire2;
-
 	public GameObject EXLock;
-
 	public GameObject EXUnlock;
-
 	public bool ScrewedSwitchEX;
-
 	public float ScrewsSwitchEX;
-
 	public GameObject PanelSwitch;
-
 	public bool OpenedExLock;
-
 	public GameObject BatteryPlaced;
-
 	public Animation BatterySpak;
-
 	public Animation BatteryAnim;
-
 	public bool UsedBattery;
-
 	public GameObject PlankDoor;
-
 	public AudioClip SmashPlank;
-
 	public float PlankHit;
-
 	public GameObject CodeLock;
-
 	public GameObject CodePad;
-
 	public bool UsedCode;
-
 	public GameObject HanglockDoor;
-
 	public GameObject HangBom;
-
 	public bool UsedPadlockKey;
-
 	public bool SpiderCellarDone;
-
 	public Animation HatchSpiderCellar;
-
 	public bool WheelCrankPlaced;
-
 	public Animation WheelCrankAction;
-
 	public AI_MomSpider AiMom;
-
 	public bool ScrewedPlattaSpiderCellar;
-
 	public float ScrewsPLSpiderCellar;
-
 	public Animation ScrewPlattaSpiderCellar;
-
 	public bool PlacedStick;
-
 	public bool UsedRustyPadlock;
-
 	public bool UsedChainCutter;
-
 	public bool OpenedIronDoors;
-
 	public Rigidbody PadlockRusty;
-
 	public GameObject TriggerLeave;
-
 	public GameObject PlankPL;
-
 	public GameObject HighlightPL;
-
 	public GameObject TriggerPlanks;
-
 	public TriggerBrokeFloor TBF;
-
 	public bool usedPlank;
-
 	public PickRay Ray;
-
 	public Animation IronDoors;
-
 	public GameObject RewardedT;
-
 	public Texture2D RopeNM;
-
 	public Texture2D RopeN;
-
 	public GameObject DropFixDis;
-
 	public float GasFill;
-
 	public GameObject Noise_PliersDoor;
-
 	public GameObject Noise_CarBattery;
-
 	public GameObject Noise_Engine;
-
 	public GameObject Noise_Spark;
-
 	public GameObject Noise_Fan;
-
 	public GameObject Noise_WPLocker;
-
 	public GameObject Noise_Book;
-
 	public GameObject Noise_Playhouse;
-
 	public GameObject Noise_Screwdriver;
-
-	private void Start()
-	{
-	}
-
-	private void Update()
-	{
-	}
-
-	private IEnumerator ScrewPlattaGoingDownSpiderCellar()
-	{
-		return null;
-	}
-
-	private IEnumerator ScrewPanelSwitchDown()
-	{
-		return null;
-	}
-
-	private IEnumerator MetalRustdown()
-	{
-		return null;
-	}
-
-	private IEnumerator RechargeProcess()
-	{
-		return null;
-	}
-
-	public void UsePadlockKey2()
-	{
-	}
-
-	public void OpenPort()
-	{
-	}
-
-	public void PlaceFusePanel()
-	{
-	}
-
-	public void PlaceP1()
-	{
-	}
-
-	public void PlaceP2()
-	{
-	}
-
-	public void PlaceP3()
-	{
-	}
-
-	public void PlaceP4()
-	{
-	}
-
-	public void StartRecharging()
-	{
-	}
-
-	public void UseElecKey()
-	{
-	}
-
-	public void OpenRemote()
-	{
-	}
-
-	public void UseSparkplug()
-	{
-	}
-
-	public void EnginePlace()
-	{
-	}
-
-	public void CarBatteryPlace()
-	{
-	}
-
-	public void PlaceUSB()
-	{
-	}
-
-	public void OpenTrunkCarKey()
-	{
-	}
-
-	public void PlacePlank()
-	{
-	}
-
-	public void UsePlayhouse()
-	{
-	}
-
-	public void UseSpecialKey()
-	{
-	}
-
-	public void PlaceMelon()
-	{
-	}
-
-	public void CutAtticWires()
-	{
-	}
-
-	public void UseWPKey()
-	{
-	}
-
-	public void PullBookshelf()
-	{
-	}
-
-	public void OpenSafe()
-	{
-	}
-
-	public void PutBook()
-	{
-	}
-
-	public void MasterKeyUsed()
-	{
-	}
-
-	public void ExtremeUnlock()
-	{
-	}
-
-	public void UseBattery()
-	{
-	}
-
-	public void NoBattery()
-	{
-	}
-
-	public void CuttingWire1()
-	{
-	}
-
-	public void CuttingWire2()
-	{
-	}
-
-	public void UseCode()
-	{
-	}
-
-	public void UsePadlockKey()
-	{
-	}
-
-	public void HitPlankDoor()
-	{
-	}
-
-	public void OpenIronDoors()
-	{
-	}
-
-	public void WoodenStickPlaced()
-	{
-	}
-
-	public void CutChains()
-	{
-	}
-
-	public void UseRustyPadlock()
-	{
-	}
-
-	public void OpenHatchSpiderCellar()
-	{
-	}
-
-	public void WheelCrankRotate()
-	{
-	}
 }
