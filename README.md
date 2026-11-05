@@ -15,7 +15,22 @@ The released game was compiled with IL2CPP, so its C# scripts weren't in the fil
 | `Assets/Editor` | `BuildGame.cs` (Windows build) and `FixDynamicFonts.cs` (rebuilds TextMeshPro font atlases lost in the export) |
 | `ProjectSettings`, `Packages` | Unity settings and package list |
 
-**Large binary assets aren't included:** textures, audio, meshes, video, cubemaps and sprites (see `.gitignore`). To open or build the project, re-export them from your own copy of the game with AssetRipper and copy them into `Assets/`.
+**Large binary assets aren't in git:** textures, audio, meshes, video, cubemaps and sprites (see `.gitignore`). They're in the asset pack on the [Releases](../../releases) page.
+
+## Setup
+
+1. Install **Unity 6000.5.5f1** exactly. Use Unity Hub → Installs → Install Editor → Archive if it isn't listed.
+2. Clone this repo, or download it as a zip.
+3. Download `GrannyLegacyDecompile-v1.0.1-Assets.zip` from the [latest release](../../releases/latest). Extract it **into the project folder** (the one with `Assets` and `ProjectSettings`), merging with the existing `Assets` folder.
+4. Open the folder in Unity 6000.5.5f1. The first import takes a while.
+5. Open `Assets/1_Scenes/Menu.unity` and press Play.
+
+Don't use your own AssetRipper export instead of the asset pack. A fresh export gives the files different GUIDs, so scenes and materials can't find them: the map turns invisible and everything looks white or grey.
+
+### Troubleshooting
+
+- **Hundreds of `CS0121: The call is ambiguous ... TMPro.TMP_ExtensionMethods` errors in `Library/PackageCache/com.unity.ugui...`:** the project was opened in a different Unity version. Close Unity, delete the `Library` folder, and reopen the project in **6000.5.5f1**.
+- **White or grey UI, missing map:** the asset pack isn't extracted, or was extracted into the wrong folder. You should end up with `Assets/Texture2D`, `Assets/Mesh` and `Assets/AudioClip` folders full of files.
 
 ## Building
 
@@ -42,7 +57,7 @@ The game is built to `../../Build/GrannyLegacyDecompile/Granny Legacy Decompile.
 
 ## Status
 
-Scripts that the scenes don't use are still empty stubs: CandyBar, ChatController, DropdownSample, EnvMapAnimator, OpenPresent, Skull and Traveler.
+Every game script is restored, including ones the current scenes don't use: CandyBar, OpenPresent, Skull, Traveler, the AQUAS water scripts and the TextMesh Pro chat, dropdown and env-map samples. Only TextMesh Pro's own benchmark and example scripts are still empty. The game never uses them.
 
 Large parts of the game haven't been played through end to end. Bug reports in the Issues tab are welcome.
 
