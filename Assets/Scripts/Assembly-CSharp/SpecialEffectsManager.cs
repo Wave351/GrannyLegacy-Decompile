@@ -2,136 +2,65 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpecialEffectsManager : MonoBehaviour
+public partial class SpecialEffectsManager : MonoBehaviour
 {
 	public GameObject Coffin1;
-
 	public GameObject Coffin2;
-
 	public GameObject MomEff;
-
 	public GameObject ToiletEff;
-
 	public GameObject[] Bats;
-
 	public GameObject[] Brooms;
-
 	public GameObject[] Canes;
-
 	public GameObject[] Arrows;
-
 	public Material[] GrannySkins;
-
 	public Texture2D GrannyWitch;
-
 	public Texture2D GrannyLepre;
-
 	public Texture2D GrannySanta;
-
 	public Texture2D GrannyBunny;
-
 	public Texture2D GrannyLGBT;
-
 	public Renderer RendererBat;
-
 	public AnimationClip AttackHalloween;
-
 	public AI_Granny AIGranny;
-
 	public AudioSource HuntMusic;
-
 	public AudioSource BGMusic;
-
 	public AudioSource BackyardAtmosphere;
-
 	public AudioClip HalloweenBY;
-
 	public AudioClip BeachBY;
-
 	public AudioClip FloweryBY;
-
 	public AudioClip HalloBG;
-
 	public AudioClip HalloChase;
-
 	public AudioClip ChaseChristmas;
-
 	public AudioClip ChristmasBG;
-
 	public Elevator Elevator;
-
 	public AudioSource GrannyFeetSource;
-
 	public AudioSource GrandpaFeetSource;
-
 	public TeddyHunt TeddyHunt;
-
 	public Eyes_Grandpa GrandpaEyes;
-
 	public Material MomMain;
-
 	public Texture2D MomChristmas;
-
 	public Color GrandpaKrampusEyes;
-
 	public Material SkySnow;
-
 	public Material SkyHalloween;
-
 	public Material SkySummer;
-
 	public Image TheEndT;
-
 	public Sprite MerryChristmasText;
-
 	public GameObject SummerWater;
-
 	public Material BatQueer;
-
 	public GameObject InMouthGrannyPride;
-
 	public GameObject GrannyPride;
-
 	public GameObject[] GrandpaPrideAcessories;
-
 	public GameObject extraTraps;
-
 	public bool lavaAtmosphereOn;
-
 	public AudioClip[] grannyLinesLava;
-
 	public AudioClip[] grandpaLinesLava;
-
 	public EnemyController EC;
-
 	public GameObject lavaRise;
-
 	public Texture2D GrannyLava;
-
 	public Texture2D MomLava;
-
 	public AudioClip LavaChase;
-
 	public AudioClip LavaBG;
-
 	public AudioSource toiletFlush;
-
 	public Renderer rendererWaterSewer;
-
 	public Renderer rendererWaterSewer2;
-
 	public Material gayWater;
-
-	private void Start()
-	{
-	}
-
-	private void Update()
-	{
-	}
-
-	private IEnumerator TimerDestroyThis()
-	{
-		return null;
-	}
 }
