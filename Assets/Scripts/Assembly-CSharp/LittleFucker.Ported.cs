@@ -19,7 +19,7 @@ public partial class LittleFucker
 	{
 	    Anim.speed = speed;
 	    if (newAnimation == name) return;
-	    if (!NormalLogicStatus) Anim.CrossFade(crossFade, CrossFadeSpeed);
+	    Anim.CrossFade(crossFade, CrossFadeSpeed);
 	    newAnimation = name;
 	}
 	// The little Santa from the present: wanders, chases the player it sees (12 units, 2 when not interested), slaps them
