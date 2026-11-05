@@ -87,7 +87,7 @@ public partial class Days
 			if (OutSource != null) { OutSource.clip = OutNM; SetActive(OutSource.gameObject, false); }
 			SetActive(NMStuff, true); SetActive(OldWater, false);
 		}
-		if (PlayerPrefs.GetInt("LightsHouse", 0) == 1) SetActive(LightBulbs, true);
+		if (PlayerPrefs.GetInt("LightsHouse", 0) == 1) { SetActive(LightBulbs, true); AddBulbSpotLights(); }
 	}
 	private void Update()
 	{
@@ -243,4 +243,28 @@ public partial class Days
 		if (camera != null) camera.fieldOfView = 60f + 5f * Mathf.Clamp(PlayerPrefs.GetInt("FOV", 1), 0, 7);
 	}
 	private static void SetActive(GameObject item, bool active) { if (item != null && item.activeSelf != active) item.SetActive(active); }
+
+	// Added for the decompile: the optional light bulbs are only meshes, so the "Lights" option lit nothing. Give each
+	// bulb a downward spot light (per-pixel, no shadows; only objects a bulb reaches pay for it).
+	private void AddBulbSpotLights()
+	{
+		if (LightBulbs == null) return;
+		foreach (var bulb in LightBulbs.GetComponentsInChildren<Renderer>(true))
+		{
+			if (bulb.transform.Find("BulbSpotLight") != null) continue;
+			var go = new GameObject("BulbSpotLight");
+			go.transform.SetParent(bulb.transform, false);
+			go.transform.position = bulb.bounds.center + Vector3.down * 0.05f;
+			go.transform.rotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
+			var light = go.AddComponent<Light>();
+			light.type = LightType.Spot;
+			light.spotAngle = 120f;
+			light.innerSpotAngle = 60f;
+			light.range = 7f;
+			light.intensity = 1.3f;
+			light.color = new Color(1f, 0.92f, 0.78f);
+			light.shadows = LightShadows.None;
+			light.renderMode = LightRenderMode.ForcePixel;
+		}
+	}
 }

@@ -15,7 +15,17 @@ public partial class FlashLightManager
 	{
 		if (PlayerPrefs.GetInt("FlashLightIsOn", 0) != 1) return;
 		LightmapSettings.lightmaps = new LightmapData[0]; DynamicGI.UpdateEnvironment();
-		if (OverrideAmbient) { RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat; RenderSettings.ambientLight = AmbColor; RenderSettings.ambientIntensity = AmbIntensity; }
+		if (OverrideAmbient)
+		{
+			RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat; RenderSettings.ambientLight = AmbColor; RenderSettings.ambientIntensity = AmbIntensity;
+			// Restoration guard: in the player the baked (bright) ambient probe is kept after changing ambientLight, so
+			// moving objects on Standard-based shaders (Granny's bat, held items) stayed fully lit in flashlight/lantern
+			// mode. Set the probe to the intended flat ambient and refresh.
+			var probe = new UnityEngine.Rendering.SphericalHarmonicsL2();
+			probe.AddAmbientLight(AmbColor * AmbIntensity);
+			RenderSettings.ambientProbe = probe;
+			DynamicGI.UpdateEnvironment();
+		}
 		if (DisReflectProbes) foreach (var probe in UnityEngine.Object.FindObjectsByType<ReflectionProbe>(FindObjectsSortMode.None)) probe.enabled = false;
 		SetUpFlashLightMode();
 		if (SMRGranny != null) foreach (var renderer in SMRGranny) if (renderer != null) renderer.sharedMaterial = SwitchRealTimeGranny;
