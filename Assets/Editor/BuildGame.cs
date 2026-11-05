@@ -37,7 +37,37 @@ public static class BuildGame
 		var icon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Texture2D/AppIcon.png");  // taken from the original exe
 		if (icon) PlayerSettings.SetIcons(NamedBuildTarget.Unknown, new[] { icon }, IconKind.Any);
 		else Debug.LogWarning("[BuildGame] AppIcon.png not found; exe keeps the default icon");
+		FixCursorTexture();
 		FixDynamicFonts.Run();                                             // dynamic TMP fonts lost their atlas in the export
 		AssetDatabase.SaveAssets();
+	}
+
+	// The game's custom mouse pointer (Player Settings > Default Cursor) was exported as a plain compressed texture,
+	// which Unity rejects as a cursor ("must be RGBA32, readable ... no mip chain"), leaving the OS arrow.
+	[InitializeOnLoadMethod]
+	static void FixCursorOnLoad() => EditorApplication.delayCall += FixCursorTexture;   // also for Play in the editor
+
+	[MenuItem("Granny/Fix Cursor Texture")]
+	public static void FixCursorTexture()
+	{
+		var cursor = PlayerSettings.defaultCursor;
+		if (!cursor) { Debug.LogWarning("[BuildGame] no default cursor set"); return; }
+		var importer = AssetImporter.GetAtPath(AssetDatabase.GetAssetPath(cursor)) as TextureImporter;
+		if (importer == null || importer.textureType == TextureImporterType.Cursor) return;
+		importer.textureType = TextureImporterType.Cursor;
+		importer.isReadable = true;
+		importer.mipmapEnabled = false;
+		importer.alphaIsTransparency = true;
+		importer.textureCompression = TextureImporterCompression.Uncompressed;
+		importer.npotScale = TextureImporterNPOTScale.None;
+		foreach (var platform in new[] { "Standalone", "Android", "iPhone", "WebGL" })
+		{
+			var ps = importer.GetPlatformTextureSettings(platform);
+			if (!ps.overridden) continue;
+			ps.overridden = false;
+			importer.SetPlatformTextureSettings(ps);
+		}
+		importer.SaveAndReimport();
+		Debug.Log("[BuildGame] cursor texture set to Cursor type: " + importer.assetPath);
 	}
 }
