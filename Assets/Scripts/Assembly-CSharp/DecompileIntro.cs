@@ -110,8 +110,8 @@ public class DecompileIntro : MonoBehaviour
 	static Sprite[] OriginalLogos()
 	{
 #if UNITY_EDITOR
-		// Same sprites and order as PlayerSettings.m_SplashScreenLogos (2 s each in the original).
-		string[] paths = { "Assets/Sprite/Sprite.asset", "Assets/Sprite/DVloperskylt3.asset", "Assets/Sprite/OmGiCredit_GrannyProjects.asset" };
+		// Same sprites and order as PlayerSettings.m_SplashScreenLogos (2 s each in the original, minus its Unity card).
+		string[] paths = { "Assets/Sprite/DVloperskylt3.asset", "Assets/Sprite/OmGiCredit_GrannyProjects.asset" };  // "Made with Unity" card removed on request
 		var list = new System.Collections.Generic.List<Sprite>();
 		foreach (var p in paths) { var sp = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(p); if (sp) list.Add(sp); }
 		return list.ToArray();

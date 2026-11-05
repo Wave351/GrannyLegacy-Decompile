@@ -288,7 +288,15 @@ public partial class MainMenu
 		ApplyOptions(); PlayerPrefs.Save(); StartCoroutine(Timerloading());
 	}
 	private IEnumerator Timerloading() { yield return new WaitForSeconds(3.5f); SceneManager.LoadScene("Scene"); }
-	public void OnApplicationQuit() { PlayerPrefs.Save(); }
+	// Original: the Quit button calls this, and it calls Application.Quit (the port had dropped the quit).
+	public void OnApplicationQuit()
+	{
+		PlayerPrefs.Save();
+#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+#endif
+		Application.Quit();
+	}
 	public void LoadGame()
 	{
 		if (GINPUT != null && (!GINPUT.gameObject.activeSelf || !GINPUT.enabled)) Application.Quit();

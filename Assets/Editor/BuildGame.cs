@@ -1,5 +1,6 @@
 using System.IO;
 using UnityEditor;
+using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public static class BuildGame
 	[MenuItem("Granny/Build Windows Game")]
 	public static void BuildWindows()
 	{
+		ApplyPlayerSettings();
 		var scenes = new[] { "Assets/1_Scenes/Menu.unity", "Assets/1_Scenes/Scene.unity", "Assets/1_Scenes/EndScene.unity" };
 		Directory.CreateDirectory(OutputDir);
 		var options = new BuildPlayerOptions
@@ -24,5 +26,17 @@ public static class BuildGame
 		BuildReport report = BuildPipeline.BuildPlayer(options);
 		Debug.Log($"[BuildGame] result={report.summary.result} errors={report.summary.totalErrors} size={report.summary.totalSize} time={report.summary.totalTime}");
 		if (Application.isBatchMode) EditorApplication.Exit(report.summary.result == BuildResult.Succeeded ? 0 : 1);
+	}
+
+	// Window, icon and splash settings for the decompile build (also saved into ProjectSettings).
+	public static void ApplyPlayerSettings()
+	{
+		PlayerSettings.resizableWindow = true;
+		PlayerSettings.allowFullscreenSwitch = true;
+		PlayerSettings.SplashScreen.showUnityLogo = false;                 // keep only the original D.Vloper / OmGi logos
+		var icon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Texture2D/AppIcon.png");  // taken from the original exe
+		if (icon) PlayerSettings.SetIcons(NamedBuildTarget.Unknown, new[] { icon }, IconKind.Any);
+		else Debug.LogWarning("[BuildGame] AppIcon.png not found; exe keeps the default icon");
+		AssetDatabase.SaveAssets();
 	}
 }
