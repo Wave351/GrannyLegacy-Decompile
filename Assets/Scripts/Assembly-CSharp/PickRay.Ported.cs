@@ -406,7 +406,7 @@ public partial class PickRay
 
 	        if (hitTag == "granpa")
 	        {
-	            var gp = hit.collider.GetComponent<AI_Grandpa>();
+	            var gp = EnemyControl != null && EnemyControl.Grandpa ? EnemyControl.Grandpa.GetComponent<AI_Grandpa>() : null;   // hit collider is a body part; the original asks EnemyController's Grandpa
 	            if (EnemyControl != null && !EnemyControl.GrandpaKilled)
 	            {
 	                if (gp != null && !gp.CaughtPlayer)
@@ -420,7 +420,7 @@ public partial class PickRay
 
 	        if (hitTag == "granpasoffa")
 	        {
-	            var gp = hit.collider.GetComponent<AI_Grandpa>();
+	            var gp = EnemyControl != null && EnemyControl.Grandpa ? EnemyControl.Grandpa.GetComponent<AI_Grandpa>() : null;   // hit collider is a body part; the original asks EnemyController's Grandpa
 	            if (EnemyControl != null && !EnemyControl.GrandpaKilled)
 	            {
 	                if (gp != null && !gp.CaughtPlayer)
@@ -434,7 +434,7 @@ public partial class PickRay
 
 	        if (hitTag == "granny")
 	        {
-	            var gr = hit.collider.GetComponent<AI_Granny>();
+	            var gr = EnemyControl != null && EnemyControl.Granny ? EnemyControl.Granny.GetComponent<AI_Granny>() : null;   // hit collider is a body part; the original asks EnemyController's Granny
 	            if (EnemyControl != null && !EnemyControl.GrannyKilled)
 	            {
 	                if (gr != null && !gr.CaughtPlayer)
@@ -627,7 +627,7 @@ public partial class PickRay
 
 	        if (hitTag == "granpasoffa")
 	        {
-	            var gp = hit.collider.GetComponent<AI_Grandpa>();
+	            var gp = EnemyControl != null && EnemyControl.Grandpa ? EnemyControl.Grandpa.GetComponent<AI_Grandpa>() : null;   // hit collider is a body part; the original asks EnemyController's Grandpa
 	            if (EnemyControl != null && !EnemyControl.GrandpaKilled)
 	            {
 	                if (gp != null && !gp.CaughtPlayer)
@@ -641,7 +641,7 @@ public partial class PickRay
 
 	        if (hitTag == "granpa")
 	        {
-	            var gp = hit.collider.GetComponent<AI_Grandpa>();
+	            var gp = EnemyControl != null && EnemyControl.Grandpa ? EnemyControl.Grandpa.GetComponent<AI_Grandpa>() : null;   // hit collider is a body part; the original asks EnemyController's Grandpa
 	            if (EnemyControl != null && !EnemyControl.GrandpaKilled)
 	            {
 	                if (gp != null && !gp.CaughtPlayer)
@@ -655,7 +655,7 @@ public partial class PickRay
 
 	        if (hitTag == "granny")
 	        {
-	            var gr = hit.collider.GetComponent<AI_Granny>();
+	            var gr = EnemyControl != null && EnemyControl.Granny ? EnemyControl.Granny.GetComponent<AI_Granny>() : null;   // hit collider is a body part; the original asks EnemyController's Granny
 	            if (EnemyControl != null && !EnemyControl.GrannyKilled)
 	            {
 	                if (gr != null && !gr.CaughtPlayer)
