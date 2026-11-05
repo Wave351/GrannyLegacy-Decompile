@@ -30,6 +30,7 @@ Don't use your own AssetRipper export instead of the asset pack. A fresh export 
 ### Troubleshooting
 
 - **Hundreds of `CS0121: The call is ambiguous ... TMPro.TMP_ExtensionMethods` errors in `Library/PackageCache/com.unity.ugui...`:** the project was opened in a different Unity version. Close Unity, delete the `Library` folder, and reopen the project in **6000.5.5f1**.
+- **Text shows as white boxes:** the font atlas images are missing. They're in git now (`Assets/Resources/fonts & materials/*.png`), so pull the latest version, or extract `GrannyLegacyDecompile-v1.0.1-Fonts.zip` from the release into the project folder. Then reopen Unity.
 - **White or grey UI, missing map:** the asset pack isn't extracted, or was extracted into the wrong folder. You should end up with `Assets/Texture2D`, `Assets/Mesh` and `Assets/AudioClip` folders full of files.
 
 ## Building

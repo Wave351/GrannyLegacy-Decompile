@@ -20,3 +20,5 @@
 *.wav
 *.mp4
 *.exr
+# Font atlas images are small and needed for any text to show (white boxes without them)
+!/Assets/Resources/fonts & materials/*.png
