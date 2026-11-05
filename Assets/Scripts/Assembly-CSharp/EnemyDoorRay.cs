@@ -13,10 +13,21 @@ public static class EnemyDoorRay
 		             || c.GetComponentInParent<AtticDoorManage>() || c.GetComponentInParent<BackdoorManage>());
 	}
 
-	public static bool Cast(Transform ray, NavMeshAgent agent, float distance, LayerMask layers, out RaycastHit hit)
+	// `working` is the door the enemy is busy opening (or rattling, if locked). It is checked first so that a new
+	// destination (for example a noise elsewhere) can't turn the steering ray away from it mid-attempt; in the original
+	// the enemy only ever starts on a door straight ahead, so it always finished opening before following the noise.
+	public static bool Cast(Transform ray, NavMeshAgent agent, float distance, LayerMask layers, out RaycastHit hit, Collider working = null)
 	{
 		hit = default;
 		if (!ray) return false;
+		if (working && working.enabled && working.gameObject.activeInHierarchy)
+		{
+			Vector3 to = working.ClosestPoint(ray.position) - ray.position;
+			if (to.sqrMagnitude < .0001f) to = working.bounds.center - ray.position;
+			RaycastHit stick;
+			if (to.sqrMagnitude > .0001f && Physics.Raycast(ray.position, to.normalized, out stick, distance, layers) && stick.collider == working)
+			{ hit = stick; return true; }
+		}
 		bool ahead = Physics.Raycast(ray.position, ray.forward, out hit, distance, layers);
 		if (ahead && IsDoor(hit.collider)) return true;
 		if (agent && agent.enabled && agent.hasPath)

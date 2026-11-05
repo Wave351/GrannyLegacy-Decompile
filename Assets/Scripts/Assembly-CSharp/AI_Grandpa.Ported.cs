@@ -44,7 +44,7 @@ public partial class AI_Grandpa
 	    if (!CaughtPlayer && !IsDying)
 	    {
 	        if (!AgentReady) return;
-	        CheckDoors();
+	        CheckDoors(); if (!IsOpeningDoor) workingDoor = null;
 	        traps = GameObject.FindGameObjectsWithTag("BearTrapActivated");
 	        SetNewBoneControllerStare(PlayerHead);
 	        var noise = GameObject.FindGameObjectWithTag(NoiseObjectTag);
@@ -204,12 +204,15 @@ public partial class AI_Grandpa
 	    if (TimerInSauna >= TimerSaunaMax && SaunaPoint2)
 	    { CurrentTarget = SaunaPoint2.position; if (AgentReady) Agent.SetDestination(CurrentTarget); }
 	}
+	// Restoration guard: the door being opened, so a noise mid-attempt can't pull the enemy away (see EnemyDoorRay).
+	private Collider workingDoor;
 	private void CheckDoors()
 	{
 	    RaycastHit hit;
 	    // Restoration guard (EnemyDoorRay): also looks along the steering direction and from 0.75 m back.
-	    if (!EnemyDoorRay.Cast(OpenDoorRay, Agent, DoorDistance, LayerEx, out hit))
-	    { TimerDoorOpening = LockedDoorAttempts = 0; IsOpeningDoor = false; Agent.isStopped = false; return; }
+	    if (!EnemyDoorRay.Cast(OpenDoorRay, Agent, DoorDistance, LayerEx, out hit, IsOpeningDoor ? workingDoor : null))
+	    { workingDoor = null; TimerDoorOpening = LockedDoorAttempts = 0; IsOpeningDoor = false; Agent.isStopped = false; return; }
+	    workingDoor = hit.collider;
 	    string door = hit.collider.gameObject.name;
 	    // Restoration guard: a door mid-swing is named "ProcessState" and is otherwise ignored, so the enemy kept walking
 	    // into it for the whole close animation. Wait in place instead; the open timer starts once it is fully shut.
