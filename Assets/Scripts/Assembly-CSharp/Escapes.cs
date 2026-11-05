@@ -3,164 +3,59 @@ using UnityEngine;
 using UnityEngine.UI;
 using com.ootii.Actors.BoneControllers;
 
-public class Escapes : MonoBehaviour
+public partial class Escapes : MonoBehaviour
 {
 	public GameObject RobotParent;
-
 	public Transform PosSpawn;
-
 	public GameObject ChestDoor;
-
 	public GameObject MobileFPS;
-
 	public PickRay Ray;
-
 	public Image Black;
-
 	public GameObject SpaceT;
-
 	public GameObject HandHold;
-
 	public GameObject MasterK;
-
 	public GameObject UIElem;
-
 	public GameObject Texts;
-
 	public BGManager BG;
-
 	public GameObject GrannyS;
-
 	public GameObject GrandpaS;
-
 	public GameObject SpiderCellarMusic;
-
 	public GameObject MomSpider;
-
 	public Animation MomAnim;
-
 	public BoneController BoneControllerMom;
-
 	public Transform PlayerTarget;
-
 	public GameObject GrannyInCave;
-
 	public Transform MomNewPos;
-
 	public Animation CellarCam;
-
 	public GameObject TheEndT;
-
 	public ScreenEffects ScreenEffects;
-
 	public GameObject SoundAttic;
-
 	public Animation RoboAnim;
-
 	public EnemyController EC;
-
 	public GameObject Granny;
-
 	public GameObject Grandpa;
-
 	public Transform PosGrannyEnd;
-
 	public Transform PosGrandpaEnd;
-
 	public Transform PosGrannyEndSC;
-
 	public Transform PosGrannyEndCar;
-
 	public Transform PosGrandpaEndCar;
-
 	public Transform CarGrannyParentTransform;
-
 	public Transform CarGrandpaParentTransform;
-
 	public GameObject Cane;
-
 	public GameObject Shotgun;
-
 	public GameObject CamGranny;
-
 	public GameObject CamNoGranny;
-
 	public GameObject CamPlayerCar;
-
 	public Paused PauseLogic;
-
 	public GameObject GrandpaCarCutsceneRun;
-
 	public bool DiedOnce;
-
 	public bool UsedWPOnce;
-
 	public bool SeenOnce;
-
 	public GameObject BloodScreens;
-
 	public Transform MomBodyRSpider;
-
 	public GameObject UINew;
-
 	public GameObject TimerUISwitch;
-
 	public PlayerStatus PS;
-
 	public HPA HPA;
-
 	public GameObject TeddyRoboPipe;
-
-	private void Start()
-	{
-	}
-
-	public void ElimBody()
-	{
-	}
-
-	public void EscapeDoor()
-	{
-	}
-
-	public void EscapeCar()
-	{
-	}
-
-	public void EscapeCellar()
-	{
-	}
-
-	public void EscapeRobo()
-	{
-	}
-
-	public void EscapeCoinsEarn()
-	{
-	}
-
-	private IEnumerator WaitCellar()
-	{
-		return null;
-	}
-
-	private IEnumerator WaitRobo()
-	{
-		return null;
-	}
-
-	private IEnumerator RoboGrandparents()
-	{
-		return null;
-	}
-
-	private IEnumerator WaitCar()
-	{
-		return null;
-	}
-
-	private IEnumerator WaitDoor()
-	{
-		return null;
-	}
 }
