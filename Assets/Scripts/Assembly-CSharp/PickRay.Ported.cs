@@ -2428,8 +2428,11 @@ public partial class PickRay
 	                Destroy(hit.collider.gameObject);
 	            }
 	        }
-	        else if (hitName == "ShotgunParentG" || hitName == "Shotgun2" || hitTag == "Shotgun2" || hitName == "ShotgunBed" || hitTag == "ShotgunParentG" || hitTag == "ShotgunBed")
+	        else if (hitName == "ShotgunParentG" || hitTag == "Shotgun2")
 	        {
+	            // Double barrel: from Grandpa's hand (ShotgunParentG, while he is down), his bed (ShotgunBed) or a dropped
+	            // copy (tag Shotgun2). Taking it also takes it off Grandpa (EnemyController.ShotgunGrandpa), so he
+	            // respawns unarmed until he picks one up or a new day starts. His hand/bed guns are only hidden.
 	            TurnOffItemTexts();
 	            if (T_HighlightItem != null)
 	            {
@@ -2441,14 +2444,16 @@ public partial class PickRay
 	            if (buttonClicked)
 	            {
 	                buttonClicked = false;
+	                PickShooty();
 	                CheckItemDropping();
+	                if (hitName == "ShotgunParentG" || hitName == "ShotgunBed") hit.collider.gameObject.SetActive(false);
+	                else Destroy(hit.collider.gameObject);
+	                if (EnemyControl != null && EnemyControl.ShotgunGrandpa != null) EnemyControl.ShotgunGrandpa.SetActive(false);
 	                TurnOffItemTexts();
 	                if (H_DSH != null) H_DSH.SetActive(true);
 	                if (Drop1 != null) Drop1.SetActive(true);
-	                PickShooty();
 	                if (Ring != null) Ring.SetActive(false);
 	                if (WC != null) WC.RevSH2();
-	                Destroy(hit.collider.gameObject);
 	            }
 	        }
 	        else if (hitName == "ammo" || hitTag == "ammo")
