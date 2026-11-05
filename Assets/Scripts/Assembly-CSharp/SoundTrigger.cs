@@ -1,40 +1,17 @@
 using UnityEngine;
 
-public class SoundTrigger : MonoBehaviour
+public partial class SoundTrigger : MonoBehaviour
 {
 	public AudioClip[] Sounds;
-
 	public AudioClip Water;
-
 	public GameObject NoiseOBJ_Granny;
-
 	public GameObject NoiseOBJ_Grandpa;
-
 	public GameObject SpawnBack;
-
 	public bool OnlyOnce;
-
 	public float TimesDropped;
-
 	public bool CanWater;
-
 	public bool Stopped;
-
 	public bool AlertsGrandpa;
-
 	public bool DestroyOnSound;
-
 	public bool WaterDes;
-
-	private void Start()
-	{
-	}
-
-	private void OnTriggerEnter(Collider other)
-	{
-	}
-
-	public void PlayRandomSound()
-	{
-	}
 }
