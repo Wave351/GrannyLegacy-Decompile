@@ -1,12 +1,35 @@
+using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
-// Added for the decompile: the menus and HUD are laid out for 16:9 and stretch at other shapes, so when the
-// (now resizable) window is resized it snaps back to 16:9 once the user lets go. Fullscreen is left alone.
+// Added for the decompile (not in the original game):
+//  * F11 or Alt+Enter toggles fullscreen (borderless at the monitor's native resolution) <-> a 1280x720 window.
+//  * A saved "maximized window" mode is turned into real fullscreen at start-up (the original default).
+//  * The menus and HUD are laid out for 16:9, so a dragged window snaps back to 16:9 once the user lets go.
+//    Fullscreen and maximized windows are left alone.
 public class WindowAspectLock : MonoBehaviour
 {
 	const float Aspect = 16f / 9f;
 	int lastW, lastH;
-	float settle;
+	float settle, cooldown;
+
+#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
+	[DllImport("user32.dll")] static extern IntPtr GetActiveWindow();
+	[DllImport("user32.dll")] static extern bool IsZoomed(IntPtr hWnd);
+	static IntPtr hwnd;
+	static bool Maximized()
+	{
+		try
+		{
+			var h = GetActiveWindow();
+			if (h != IntPtr.Zero) hwnd = h;
+			return hwnd != IntPtr.Zero && IsZoomed(hwnd);
+		}
+		catch { return false; }
+	}
+#else
+	static bool Maximized() => false;
+#endif
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
 	static void Install()
@@ -15,11 +38,25 @@ public class WindowAspectLock : MonoBehaviour
 		var go = new GameObject("WindowAspectLock");
 		DontDestroyOnLoad(go);
 		go.AddComponent<WindowAspectLock>();
+		if (Screen.fullScreenMode == FullScreenMode.MaximizedWindow) GoFullscreen();
 	}
+
+	static void GoFullscreen() =>
+		Screen.SetResolution(Display.main.systemWidth, Display.main.systemHeight, FullScreenMode.FullScreenWindow);
 
 	void Update()
 	{
-		if (Screen.fullScreenMode != FullScreenMode.Windowed) { lastW = lastH = 0; return; }
+		bool alt = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt) || Input.GetKey(KeyCode.AltGr);
+		if (Input.GetKeyDown(KeyCode.F11) || (alt && (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))))
+		{
+			if (Screen.fullScreenMode == FullScreenMode.Windowed && !Maximized()) GoFullscreen();
+			else Screen.SetResolution(1280, 720, FullScreenMode.Windowed);
+			cooldown = 1f; lastW = lastH = 0;
+			return;
+		}
+		if (cooldown > 0) { cooldown -= Time.unscaledDeltaTime; lastW = lastH = 0; return; }   // let a mode switch finish
+
+		if (Screen.fullScreenMode != FullScreenMode.Windowed || Maximized()) { lastW = lastH = 0; return; }
 		int w = Screen.width, h = Screen.height;
 		if (w != lastW || h != lastH) { lastW = w; lastH = h; settle = .35f; return; }   // still being dragged
 		if (settle <= 0) return;

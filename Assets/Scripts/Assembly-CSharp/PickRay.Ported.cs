@@ -1346,8 +1346,7 @@ public partial class PickRay
 	                buttonClicked = false;
 	                if (H_PK != null && H_PK.activeSelf)
 	                {
-	                    H_PK.SetActive(false);
-	                    if (Drop1 != null) Drop1.SetActive(false);
+	                    // Original keeps this item in hand after use (no SetActive(false) here).
 	                    if (HP != null) HP.UsePadlockKey();
 	                    StopSetOfTexts();
 	                    if (Ring != null) Ring.SetActive(false);
@@ -1369,8 +1368,7 @@ public partial class PickRay
 	                buttonClicked = false;
 	                if (H_PK != null && H_PK.activeSelf)
 	                {
-	                    H_PK.SetActive(false);
-	                    if (Drop1 != null) Drop1.SetActive(false);
+	                    // Original keeps this item in hand after use (no SetActive(false) here).
 	                    if (HP != null) HP.UsePadlockKey2();
 	                    StopSetOfTexts();
 	                    if (Ring != null) Ring.SetActive(false);
@@ -1426,8 +1424,7 @@ public partial class PickRay
 	                        buttonClicked = false;
 	                        if (H_EK != null && H_EK.activeSelf)
 	                        {
-	                            H_EK.SetActive(false);
-	                            if (Drop1 != null) Drop1.SetActive(false);
+	                            // Original keeps this item in hand after use (no SetActive(false) here).
 	                            HP.UseElecKey();
 	                            StopSetOfTexts();
 	                            if (Ring != null) Ring.SetActive(false);
@@ -1546,8 +1543,7 @@ public partial class PickRay
 	                    buttonClicked = false;
 	                    if (H_CK != null && H_CK.activeSelf)
 	                    {
-	                        H_CK.SetActive(false);
-	                        if (Drop1 != null) Drop1.SetActive(false);
+	                        // Original keeps this item in hand after use (no SetActive(false) here).
 	                        if (HP != null) HP.OpenTrunkCarKey();
 	                        StopSetOfTexts();
 	                        if (Ring != null) Ring.SetActive(false);
@@ -1924,8 +1920,7 @@ public partial class PickRay
 	                buttonClicked = false;
 	                if (H_PLAYK != null && H_PLAYK.activeSelf)
 	                {
-	                    H_PLAYK.SetActive(false);
-	                    if (Drop1 != null) Drop1.SetActive(false);
+	                    // Original keeps this item in hand after use (no SetActive(false) here).
 	                    if (HP != null) HP.UsePlayhouse();
 	                    StopSetOfTexts();
 	                    if (Ring != null) Ring.SetActive(false);
@@ -1945,8 +1940,7 @@ public partial class PickRay
 	                buttonClicked = false;
 	                if (H_CO != null && H_CO.activeSelf)
 	                {
-	                    H_CO.SetActive(false);
-	                    if (Drop1 != null) Drop1.SetActive(false);
+	                    // Original keeps this item in hand after use (no SetActive(false) here).
 	                    if (HP != null) HP.UseCode();
 	                    StopSetOfTexts();
 	                    if (Ring != null) Ring.SetActive(false);
@@ -2161,8 +2155,7 @@ public partial class PickRay
 	                        buttonClicked = false;
 	                        if (H_SK != null && H_SK.activeSelf)
 	                        {
-	                            H_SK.SetActive(false);
-	                            if (Drop1 != null) Drop1.SetActive(false);
+	                            // Original keeps this item in hand after use (no SetActive(false) here).
 	                            HP.OpenSafe();
 	                            StopSetOfTexts();
 	                            if (Ring != null) Ring.SetActive(false);
@@ -2597,8 +2590,7 @@ public partial class PickRay
 	                buttonClicked = false;
 	                if (H_BS != null && H_BS.activeSelf)
 	                {
-	                    H_BS.SetActive(false);
-	                    if (Drop1 != null) Drop1.SetActive(false);
+	                    // Original keeps the bird seed in hand after filling the plate.
 	                    if (CM != null) CM.FillPlate();
 	                    StopSetOfTexts();
 	                    if (Ring != null) Ring.SetActive(false);

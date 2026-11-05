@@ -32,11 +32,12 @@ public static class BuildGame
 	public static void ApplyPlayerSettings()
 	{
 		PlayerSettings.resizableWindow = true;
-		PlayerSettings.allowFullscreenSwitch = true;
+		PlayerSettings.allowFullscreenSwitch = false;                      // WindowAspectLock handles Alt+Enter / F11 itself
 		PlayerSettings.SplashScreen.showUnityLogo = false;                 // keep only the original D.Vloper / OmGi logos
 		var icon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Texture2D/AppIcon.png");  // taken from the original exe
 		if (icon) PlayerSettings.SetIcons(NamedBuildTarget.Unknown, new[] { icon }, IconKind.Any);
 		else Debug.LogWarning("[BuildGame] AppIcon.png not found; exe keeps the default icon");
+		FixDynamicFonts.Run();                                             // dynamic TMP fonts lost their atlas in the export
 		AssetDatabase.SaveAssets();
 	}
 }
