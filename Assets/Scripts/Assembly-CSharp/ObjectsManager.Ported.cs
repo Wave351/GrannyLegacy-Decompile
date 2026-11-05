@@ -38,18 +38,22 @@ public partial class ObjectsManager
 	                    DisableOneFourObjects, DisableOneFiveObjects, DisableOneSixObjects, DisableOneSevenObjects };
 	                for (int v = 7; v >= version; v--) SetAll(newer[v], false);
 	            }
-	            else if (version == 0) FirstVer.SetActive(true);
-	            else OldVer.SetActive(true);
-	            // Item spots that did not exist yet in that version are moved into the house (vases) or to their old places.
-	            if (version <= 4) PlaceAt(PaintingBedroom, PaintingBedroomRepos);
-	            if (version <= 2) ObjResetPoint.position = ObjectResetPointOld.position;
-	            if (version == 0) ToHouse(CellarVasePos);
-	            if (version <= 1) PicturePos_3.transform.position = SetPic3ToSpotPos.position;
-	            if (version <= 2) { PicturePos_4_1.transform.position = SetPic4ToSpotPos.position; PicturePos_4_2.transform.position = SetPic4ToSpotPos.position; }
-	            if (version <= 4) { ToHouse(AtticVasePos1); ToHouse(AtticVasePos2); }
-	            if (version <= 6) { ToHouse(SewerVasePos1); ToHouse(SewerVasePos2); ToHouse(SewerVasePos3); }
-	            ToHouse(SpiderCellarVasePos);
-	            if (version <= 2) ToHouse(BackyardVasePos);
+	            else
+	            {
+	                if (version == 0) FirstVer.SetActive(true);
+	                else OldVer.SetActive(true);
+	                // Non-seeded runs only: item spots that did not exist yet in that version are moved into the house
+	                // (vases) or to their old places. Seeded runs keep them where the seed layout expects them.
+	                if (version <= 4) PlaceAt(PaintingBedroom, PaintingBedroomRepos);
+	                if (version <= 2) ObjResetPoint.position = ObjectResetPointOld.position;
+	                if (version == 0) ToHouse(CellarVasePos);
+	                if (version <= 1) PicturePos_3.transform.position = SetPic3ToSpotPos.position;
+	                if (version <= 2) { PicturePos_4_1.transform.position = SetPic4ToSpotPos.position; PicturePos_4_2.transform.position = SetPic4ToSpotPos.position; }
+	                if (version <= 4) { ToHouse(AtticVasePos1); ToHouse(AtticVasePos2); }
+	                if (version <= 6) { ToHouse(SewerVasePos1); ToHouse(SewerVasePos2); ToHouse(SewerVasePos3); }
+	                ToHouse(SpiderCellarVasePos);
+	                if (version <= 2) ToHouse(BackyardVasePos);
+	            }
 	        }
 	        ElectricCoil.SetActive(false);
 	    }

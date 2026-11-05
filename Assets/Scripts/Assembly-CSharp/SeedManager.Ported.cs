@@ -11,6 +11,7 @@ using UnityEngine.UI;
 // Ported from Annotated-Pseudocode/SeedManager.c (Granny Legacy, IL2CPP x64).
 public partial class SeedManager
 {
+	public SeedManager() { Seed = 12345; RandomizeSeed = true; activatePlacedItems = true; fillAllFreeSpawns = true; EscapeItemPuzzleChance = 0.7f; }
 	private void Awake()
 	{
 	    BuildLookup();
@@ -227,8 +228,7 @@ public partial class SeedManager
 	            var data = container.GetComponent<ItemSeedData>();
 	            if (data != null && data.containedItems != null && data.containedItems.Any(x => string.Equals(x.Trim(), itemName.Trim(), StringComparison.OrdinalIgnoreCase)))
 	            {
-	                var p = GetEffectivePuzzleOfItem(data.itemName, visited);
-	                if (p != null) return p;
+	                return GetEffectivePuzzleOfItem(data.itemName, visited);   // first container holding it decides, as in the original
 	            }
 	        }
 	    }
@@ -496,25 +496,31 @@ public partial class SeedManager
 	            }
 	        }
 
+	        // Escape items no puzzle picked: with EscapeItemPuzzleChance they go straight into a free puzzle spot,
+	        // otherwise (or if none fits) into a free spawn area. Both are placed now, before the puzzle items.
 	        if (requiredEscapeItemNames != null && itemsByName != null)
 	        {
 	            foreach (var reqName in requiredEscapeItemNames)
 	            {
-	                if (itemsByName.TryGetValue(reqName, out var reqItem) && reqItem != null)
+	                if (!itemsByName.TryGetValue(reqName, out var reqItem) || reqItem == null) continue;
+	                if (assignedByPuzzle.Values.Any(x => x == reqItem)) continue;
+	                if (rnd.NextDouble() < (double)EscapeItemPuzzleChance && puzzleDefs != null && puzzleDefs.Count > 0)
 	                {
-	                    bool isAssigned = assignedByPuzzle.Values.Any(x => x == reqItem);
-	                    if (!isAssigned && rnd.NextDouble() < (double)EscapeItemPuzzleChance)
+	                    var compatiblePuzzles = sortedPuzzles
+	                        .Where(p => p.spawnPoint != null && !usedPuzzleSpawns.Contains(p.spawnPoint) && assignedByPuzzle[p] == null && IsItemAllowedForPuzzle(reqItem, p))
+	                        .ToList();
+	                    if (compatiblePuzzles.Count > 0)
 	                    {
-	                        var compatiblePuzzles = sortedPuzzles
-	                            .Where(p => assignedByPuzzle[p] == null && IsItemAllowedForPuzzle(reqItem, p) && IsSafeContainerPlacement(reqItem, p))
-	                            .ToList();
-	                        if (compatiblePuzzles.Count > 0)
-	                        {
-	                            var targetP = compatiblePuzzles[rnd.Next(compatiblePuzzles.Count)];
-	                            assignedByPuzzle[targetP] = reqItem;
-	                        }
+	                        var targetP = compatiblePuzzles[rnd.Next(compatiblePuzzles.Count)];
+	                        PlaceItemAtTransform(reqItem, targetP.spawnPoint, false);
+	                        usedPuzzleSpawns.Add(targetP.spawnPoint);
+	                        usedItemNames.Add(reqName);
+	                        puzzleHasItem[targetP.puzzleName] = true;
+	                        continue;
 	                    }
 	                }
+	                PlaceItemInFreeArea(reqItem);
+	                usedItemNames.Add(reqName);
 	            }
 	        }
 
