@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,8 +13,8 @@ public partial class HandlePuzzles
 {
 	public HandlePuzzles()
 	{
-	    SpeedFill = .1f; SpeedWheelMain = 25; ValueHinkCurrentY = -30.87071f; HinkGetSpeed = 4; ValueWinchZ = -1.707599E-06f;
-	    ValueWireY = 4.432013f; MaxBarbScale = 1.089923f; MaxBarbPos = 4.389988f; SpeedBarbWire = 10; ScaleBarbWire = 6.593704f;
+	    SpeedFill = .1f; SpeedWheelMain = 25; ValueHinkCurrentY = -30.87071f; HinkGetSpeed = 4; ValueWinchZ = -1.707547E-06f;
+	    ValueWireY = 4.431982f; MaxBarbScale = 1.089923f; MaxBarbPos = 4.3895f; SpeedBarbWire = 10; ScaleBarbWire = 6.593704f;
 	    SpeedBarbWireScaleSpeed = 5; BarbSpedUp = 1; Tilling1 = 1; SpeedRevTilling = .1f; SpeedWinchHandle = 50; MaxBarbwire = 36.28f;
 	    SpeedRotateFan = 3; FanStopSpeed = 10; RotateFan = true; GasFill = .03f;
 	}
