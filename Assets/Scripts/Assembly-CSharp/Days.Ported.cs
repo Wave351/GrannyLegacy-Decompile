@@ -51,9 +51,9 @@ public partial class Days
 			}
 		}
 		if (difficulty == 0) SetActive(NormalFeature, false);
-		if (difficulty == 2) { SetActive(EasyFeature, false); if (extraLocks) SetActive(NormalFeature, false); }
+		if (difficulty == 2) SetActive(EasyFeature, false);             // Normal+ (incl. its creaking floors) stays on Hard, with or without extra locks
 		SetActive(ExtremeFeature, difficulty >= 3); SetActive(ImpossibleFeature, difficulty >= 4);
-		if (difficulty >= 3) { SetActive(EasyFeature, false); SetActive(NormalFeature, false); }
+		if (difficulty >= 3) { if (extraLocks || version > 2) SetActive(EasyFeature, false); SetActive(NormalFeature, false); }
 		if (difficulty == 5)
 		{
 			SetActive(HollowFeature, true);
@@ -65,7 +65,7 @@ public partial class Days
 				if (noise != null) noise.enabled = false;
 			}
 		}
-		if (version != 8) SetActive(NumberPads, false);
+		if (!extraLocks && version != 8) SetActive(NumberPads, false);
 		bool dark = difficulty >= 3 || PlayerPrefs.GetInt("Dark", 0) == 1;
 		RenderSettings.fog = dark;
 		if (dark) RenderSettings.fogEndDistance = difficulty == 3 ? 6f : difficulty >= 4 ? 7.4f : 13.5f;
