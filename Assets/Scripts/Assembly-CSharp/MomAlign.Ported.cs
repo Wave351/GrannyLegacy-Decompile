@@ -19,7 +19,7 @@ public partial class MomAlign
 	    if (!Physics.Raycast(Target.position + Vector3.up * .5f, Vector3.down, out hit, 2, Layer)) return;
 	    Quaternion tilt = Quaternion.FromToRotation(Target.up, hit.normal) * Target.rotation;
 	    Vector3 e = tilt.eulerAngles;
-	    Quaternion goal = Quaternion.Euler(e.x, Target.eulerAngles.y, e.z);
+	    Quaternion goal = Quaternion.Euler(e.x, Target.eulerAngles.y, Target.eulerAngles.z);   // as the original: only the pitch follows the ground
 	    Target.rotation = Quaternion.Lerp(Target.rotation, goal, Time.deltaTime * RotMax);
 	}
 }

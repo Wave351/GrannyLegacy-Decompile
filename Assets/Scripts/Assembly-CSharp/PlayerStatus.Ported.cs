@@ -33,6 +33,66 @@ public partial class PlayerStatus
 	    else if (TimerStopped && TimerText) TimerText.color = Color.red;
 	    if (TimerUI) TimerUI.SetActive(PlayerPrefs.GetInt("GameTimer") == 1);
 	    if (Input.GetKeyDown(KeyCode.L)) PlayerPrefs.SetInt("GameTimer", PlayerPrefs.GetInt("GameTimer") == 0 ? 1 : 0);
+	    ValidateHidingState();
+	}
+
+	// Restoration guard: the hiding flags are only cleared by OnTriggerExit. Glitching out of a hiding spot (falling
+	// through the floor of the basement crawl space, being teleported, the trigger switching off) skips that exit, so
+	// Granny kept running to the saved hiding position (PlayerPos / PlayerSpot) every time she saw the player, until
+	// they walked into that spot again. Check twice a second that the player really is inside a hiding trigger.
+	private float hideCheckTimer;
+	private readonly Collider[] hideOverlap = new Collider[64];
+	private void ValidateHidingState()
+	{
+	    hideCheckTimer += Time.deltaTime;
+	    if (hideCheckTimer < 0.5f) return;
+	    hideCheckTimer = 0f;
+	    if (!Player || !Player.activeInHierarchy) return;
+	    var cc = Player.GetComponent<CharacterController>();
+	    if (!cc || !cc.enabled) return;   // bed/car/coffin hiding and cutscenes move the player without the controller
+	    bool under = false, closet = false, regular = false;
+	    if (HidingUnderThings || HidingInClosets || HidingFromHouseEnemy)
+	    {
+	        Transform t = Player.transform;
+	        float scale = Mathf.Max(Mathf.Abs(t.lossyScale.x), Mathf.Abs(t.lossyScale.z));
+	        float radius = cc.radius * scale + 0.15f;
+	        float half = Mathf.Max(0f, cc.height * Mathf.Abs(t.lossyScale.y) * 0.5f - cc.radius * scale);
+	        Vector3 c = t.TransformPoint(cc.center);
+	        int n = Physics.OverlapCapsuleNonAlloc(c + t.up * half, c - t.up * half, radius, hideOverlap, ~0, QueryTriggerInteraction.Collide);
+	        for (int i = 0; i < n; i++)
+	        {
+	            var col = hideOverlap[i];
+	            if (!col || !col.isTrigger) continue;
+	            foreach (var hide in col.GetComponents<Hide>())
+	            {
+	                regular |= hide.RegularHide; under |= hide.UnderStuffHide; closet |= hide.ClosetHiding;
+	            }
+	            var attic = col.GetComponent<HideFixAttic>();
+	            if (attic) under = true;   // trigger messages reach disabled scripts too
+	            var hc = col.GetComponent<HideCloset>();
+	            if (hc) closet = true;
+	        }
+	    }
+	    bool cleared = false;
+	    if (HidingUnderThings && !under) { HidingUnderThings = false; cleared = true; }
+	    if (HidingInClosets && !closet) { HidingInClosets = false; cleared = true; }
+	    if (HidingFromHouseEnemy && !regular) { HidingFromHouseEnemy = false; cleared = true; }
+	    AI_Granny granny = Granny ? Granny.GetComponent<AI_Granny>() : null;
+	    AI_Grandpa grandpa = Grandpa ? Grandpa.GetComponent<AI_Grandpa>() : null;
+	    if (cleared)
+	    {
+	        if (granny) { granny.UnSeenPlayer = false; granny.CanOpenClosets = false; granny.PlayerPos = Player.transform.position; }
+	        if (grandpa) { grandpa.UnSeenPlayer = false; grandpa.CanOpenClosets = false; grandpa.PlayerPos = Player.transform.position; }
+	    }
+	    // HideFix points the enemies at a fixed spot while it reports the player hidden; if no HideFix does, they
+	    // must chase the player again.
+	    bool anyFix = false;
+	    foreach (var fix in FindObjectsByType<HideFix>(FindObjectsSortMode.None)) if (fix.enabled && fix.isPlayerHidden) { anyFix = true; break; }
+	    if (!anyFix)
+	    {
+	        if (granny && granny.Player && granny.PlayerSpot != granny.Player) granny.PlayerSpot = granny.Player;
+	        if (grandpa && grandpa.Player && grandpa.PlayerSpot != grandpa.Player) grandpa.PlayerSpot = grandpa.Player;
+	    }
 	}
 	private void LookToward(GameObject target, float speed, bool narrowFOV)
 	{
