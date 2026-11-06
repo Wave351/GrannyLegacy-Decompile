@@ -94,6 +94,7 @@ public partial class MainMenu
 			new MenuToggle(Limping, "Limping"), new MenuToggle(FlashLight, "FlashLightIsOn"),
 			new MenuToggle(Glitches, "GlitchesAndShit"), new MenuToggle(MotionBlur, "EFFECT_MB"),
 			new MenuToggle(ChaseEffect, "EFFECT_CC"), new MenuToggle(AmbientOcclusion, "EFFECT_AMB"),
+			new MenuToggle(NightmareFogToggle = CreateNightmareFogToggle(), "NightmareFog"),
 		};
 		RefreshPurchases();
 		if (SP != null) SP.SetIsOnWithoutNotify(false);
@@ -137,6 +138,41 @@ public partial class MainMenu
 		if (preferencesDirty) { PlayerPrefs.Save(); preferencesDirty = false; }
 	}
 
+	// Added for the decompile: a "Nightmare Fog" toggle on the Visuals page, copied from the House Lights toggle and
+	// placed above the row of toggles. Saved as "NightmareFog"; Days turns on the game's unused red fog.
+	private Toggle NightmareFogToggle;
+	private Toggle CreateNightmareFogToggle()
+	{
+		if (Lights == null) return null;
+		var copy = UnityEngine.Object.Instantiate(Lights.gameObject, Lights.transform.parent);
+		copy.name = "Option_NightmareFog";
+		var source = (RectTransform)Lights.transform;
+		var rect = (RectTransform)copy.transform;
+		// Raise the FOV and Texture quality sliders to the Outlines row, and put Nightmare Fog in the space they
+		// leave, centred above the row of toggles.
+		float sliderRow = Outlines != null ? ((RectTransform)Outlines.transform).anchoredPosition.y : 242f;
+		foreach (var slider in new[] { FOV, Quality })
+		{
+			if (slider == null) continue;
+			var sliderRect = (RectTransform)slider.transform;
+			sliderRect.anchoredPosition = new Vector2(sliderRect.anchoredPosition.x, sliderRow);
+		}
+		rect.anchoredPosition = new Vector2(0f, source.anchoredPosition.y + 142f);
+		var label = copy.transform.Find("TextOption");
+		if (label != null && label.TryGetComponent(out TMP_Text labelText)) labelText.text = "Nightmare Fog";
+		var desc = copy.transform.Find("Desc");
+		if (desc != null)
+		{
+			if (desc.TryGetComponent(out TMP_Text descText)) descText.text = "Fills the whole house with red fog. Needs Nightmare textures.";
+			var hover = copy.AddComponent<HoverTextActivato>();
+			hover.T = desc.gameObject; hover.SecondP = SecondP;
+		}
+		var toggle = copy.GetComponent<Toggle>();
+		toggle.onValueChanged = new Toggle.ToggleEvent();
+		toggle.onValueChanged.AddListener(_ => OnClickSound());
+		return toggle;
+	}
+
 	private void ApplyOptions()
 	{
 		int difficulty = SliderInt(Difficulty, 0, 5);
@@ -149,6 +185,8 @@ public partial class MainMenu
 		}
 		int version = SliderInt(VersionControl, 0, 8);
 		if (Extras != null) { Extras.interactable = version == 8; if (version != 8) Extras.SetIsOnWithoutNotify(false); }
+		// Nightmare Fog is greyed out (and off) unless Nightmare textures are on.
+		if (NightmareFogToggle != null) { NightmareFogToggle.interactable = IsOn(NM); if (!IsOn(NM)) NightmareFogToggle.SetIsOnWithoutNotify(false); }
 		foreach (var binding in savedToggles)
 			if (binding.Control != null) SaveInt(binding.Key, binding.Control.isOn ? 1 : 0);
 		foreach (var binding in savedSliders)

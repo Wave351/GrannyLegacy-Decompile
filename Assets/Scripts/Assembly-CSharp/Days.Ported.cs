@@ -89,6 +89,16 @@ public partial class Days
 			SetActive(NMStuff, true); SetActive(OldWater, false);
 		}
 		if (PlayerPrefs.GetInt("LightsHouse", 0) == 1) { SetActive(LightBulbs, true); AddBulbSpotLights(); }
+		if (nightmare && PlayerPrefs.GetInt("NightmareFog", 0) == 1) EnableNightmareFog();
+	}
+
+	// Added for the decompile: the game ships three red fog volumes (Nightmare-Stuff/Fogs) that are never switched on.
+	// The "Nightmare Fog" menu option (only available with Nightmare textures) turns them on around the player so
+	// the whole house is foggy. The house lights don't remove it.
+	private void EnableNightmareFog()
+	{
+		if (Player == null) return;
+		NightmareFogFollow.Setup(NMStuff, Player.transform);
 	}
 	private void Update()
 	{
