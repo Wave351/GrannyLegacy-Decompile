@@ -210,6 +210,8 @@ public partial class AI_Granny
 	}
 	// Restoration guard: the door being opened, so a noise mid-attempt can't pull the enemy away (see EnemyDoorRay).
 	private Collider workingDoor;
+	// The door this enemy itself just opened or shut: it walks on through the swing, as in the original.
+	private Collider movedDoor; private float movedDoorTime;
 	private void CheckDoors()
 	{
 	    RaycastHit hit;
@@ -220,7 +222,9 @@ public partial class AI_Granny
 	    string door = hit.collider.gameObject.name;
 	    // Restoration guard: a door mid-swing is named "ProcessState" and is otherwise ignored, so the enemy kept walking
 	    // into it for the whole close animation. Wait in place instead; the open timer starts once it is fully shut.
-	    if (door == "ProcessState" && hit.collider.GetComponent<AnimatedStuff>()) { IsOpeningDoor = true; return; }
+	    // Doors the enemy moved itself are skipped, so it doesn't stand still for the whole swing after opening one.
+	    if (door == "ProcessState" && hit.collider.GetComponent<AnimatedStuff>() && !(hit.collider == movedDoor && Time.time - movedDoorTime < 3f))
+	    { IsOpeningDoor = true; return; }
 	    bool closet = door == "GarderobDoor" || door == "MetalLockerDoor";
 	    bool open = door == "Innerdoor" || door == "SmallDoor" || door == "MeatDoor" || door == "OldHouseWoodenDoor" || door == "OuthouseDoor" || door == "StealDoor" || (closet && CanOpenClosets);
 	    bool close = door == "Motorhuv2" || door == "ClosetDoorR2" || door == "ClosetDoorL2";
@@ -232,7 +236,7 @@ public partial class AI_Granny
 	        if (TimerDoorOpening >= TimerMaxDoor)
 	        {
 	            var animated = hit.collider.GetComponent<AnimatedStuff>();
-	            if (animated) { if (close) animated.CloseAction(); else animated.OpenAction(); }
+	            if (animated) { if (close) animated.CloseAction(); else animated.OpenAction(); movedDoor = hit.collider; movedDoorTime = Time.time; }
 	            TimerDoorOpening = 0;
 	        }
 	        return;

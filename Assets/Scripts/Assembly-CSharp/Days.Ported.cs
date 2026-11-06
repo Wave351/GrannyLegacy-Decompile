@@ -66,8 +66,7 @@ public partial class Days
 			}
 		}
 		if (!extraLocks && version != 8) SetActive(NumberPads, false);
-		// Added for the decompile: the optional house lights override the fog (Dark option and difficulty fog).
-		bool dark = (difficulty >= 3 || PlayerPrefs.GetInt("Dark", 0) == 1) && PlayerPrefs.GetInt("LightsHouse", 0) != 1;
+		bool dark = difficulty >= 3 || PlayerPrefs.GetInt("Dark", 0) == 1;
 		RenderSettings.fog = dark;
 		if (dark) RenderSettings.fogEndDistance = difficulty == 3 ? 6f : difficulty >= 4 ? 7.4f : 13.5f;
 		bool nightmare = PlayerPrefs.GetInt("Textures", 0) == 1;
