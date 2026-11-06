@@ -1557,7 +1557,7 @@ public partial class PickRay
 	                }
 	            }
 	        }
-	        else if (hitName == "CutAreaTriggerText")
+	        else if (hitName == "CutAreaTriggerText" && (HP == null || !HP.PlacedMelon))   // as the original: no prompt once the melon is in
 	        {
 	            TurnOffItemTexts();
 	            if (Ring != null) Ring.SetActive(true);
@@ -1715,9 +1715,12 @@ public partial class PickRay
 	                buttonClicked = false;
 	                if (H_WR != null && H_WR.activeSelf)
 	                {
-	                    Destroy(hit.collider.gameObject);
+	                    if (HP != null) HP.SkruvEngine += 1f;
 	                    StopSetOfTexts();
 	                    if (Ring != null) Ring.SetActive(false);
+	                    Destroy(hit.collider.gameObject);
+	                    var audio = GetComponent<AudioSource>();
+	                    if (audio != null && Screw != null) audio.PlayOneShot(Screw);
 	                }
 	                else
 	                {
@@ -2205,6 +2208,7 @@ public partial class PickRay
 	                if (H_SD != null && H_SD.activeSelf)
 	                {
 	                    hit.collider.gameObject.name = "Untagged";
+	                    if (HP != null) HP.ScrewsPLSpiderCellar += 1f;
 	                    var anim = hit.collider.GetComponent<Animation>();
 	                    if (anim != null) anim.Play("screwAnim");
 	                    StopSetOfTexts();
@@ -2228,6 +2232,7 @@ public partial class PickRay
 	                if (H_SD != null && H_SD.activeSelf)
 	                {
 	                    hit.collider.gameObject.name = "ScrewedIt";
+	                    if (HP != null) HP.ScrewsOldHouse += 1f;
 	                    var anim = hit.collider.GetComponent<Animation>();
 	                    if (anim != null) anim.Play("Screw1Open");
 	                    StopSetOfTexts();
@@ -2251,6 +2256,7 @@ public partial class PickRay
 	                if (H_SD != null && H_SD.activeSelf)
 	                {
 	                    hit.collider.gameObject.name = "ScrewedIt";
+	                    if (HP != null) HP.ScrewsOldHouse += 1f;
 	                    var anim = hit.collider.GetComponent<Animation>();
 	                    if (anim != null) anim.Play("Screw2Open");
 	                    StopSetOfTexts();
@@ -2274,6 +2280,7 @@ public partial class PickRay
 	                if (H_SD != null && H_SD.activeSelf)
 	                {
 	                    hit.collider.gameObject.name = "Untagged";
+	                    if (HP != null) HP.ScrewsSwitchEX += 1f;
 	                    var anim = hit.collider.GetComponent<Animation>();
 	                    if (anim != null) anim.Play("ELscrew");
 	                    StopSetOfTexts();
