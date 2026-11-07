@@ -254,8 +254,9 @@ public partial class Days
 	}
 	private static void SetActive(GameObject item, bool active) { if (item != null && item.activeSelf != active) item.SetActive(active); }
 
-	// Added for the decompile: the optional light bulbs are only meshes, so the "Lights" option lit nothing. Give each
-	// bulb a downward spot light (per-pixel, no shadows; only objects a bulb reaches pay for it).
+	// Added for the decompile (the original game's bulbs are only meshes, so the "Lights" option lit nothing): a small
+	// light under each bulb. They're vertex lights, worked out in each object's normal pass: per-pixel lights cost every
+	// nearby object one more draw per bulb, and with 84 bulbs a hallway went from ~320 to ~4,000 draw calls (27 FPS).
 	private void AddBulbSpotLights()
 	{
 		if (LightBulbs == null) return;
@@ -265,16 +266,13 @@ public partial class Days
 			var go = new GameObject("BulbSpotLight");
 			go.transform.SetParent(bulb.transform, false);
 			go.transform.position = bulb.bounds.center + Vector3.down * 0.05f;
-			go.transform.rotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
 			var light = go.AddComponent<Light>();
-			light.type = LightType.Spot;
-			light.spotAngle = 120f;
-			light.innerSpotAngle = 60f;
-			light.range = 7f;
+			light.type = LightType.Point; // Vertex lighting treats every light as a point light.
+			light.range = 5f;
 			light.intensity = 1.3f;
 			light.color = new Color(1f, 0.92f, 0.78f);
 			light.shadows = LightShadows.None;
-			light.renderMode = LightRenderMode.ForcePixel;
+			light.renderMode = LightRenderMode.ForceVertex;
 		}
 	}
 }
